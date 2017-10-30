@@ -1,0 +1,151 @@
+<?php    
+session_start();
+ if (empty($_SESSION['username']) AND empty($_SESSION['passuser'])){
+  echo "<link href='style.css' rel='stylesheet' type='text/css'>
+ <center>Untuk mengakses modul, Anda harus login <br>";
+  echo "<a href=../../index.php><b>LOGIN</b></a></center>";
+}
+else{
+
+function GetCheckboxes($table, $key, $Label, $Nilai='') {
+  $s = "select * from $table order by nama_tag";
+  $r = mysql_query($s);
+  $_arrNilai = explode(',', $Nilai);
+  $str = '';
+  while ($w = mysql_fetch_array($r)) {
+    $_ck = (array_search($w[$key], $_arrNilai) === false)? '' : 'checked';
+    $str .= "<input type=checkbox name='".$key."[]' value='$w[$key]' $_ck>$w[$Label] ";
+  }
+  return $str;
+}
+
+$aksi="modul/mod_pin/aksi_pin.php";
+switch($_GET[act]){
+  // Tampil Berita
+  default:
+    echo "<h2>PIN PMB</h2>
+          <input type=button value='Tambah PIN' onclick=\"window.location.href='?module=pin&act=tambahpin';\">
+          <table>
+          <tr><th>No</th><th>No Pin</th><th>Kode Aktivasi</th><th>Status</th><th>Is Online</th><th>Aksi</th></tr>";
+
+    $p      = new Paging;
+    $batas  = 10;
+    $posisi = $p->cariPosisi($batas);
+
+   // if ($_SESSION[leveluser]=='admin'){
+      $tampil = mysql_query("SELECT * FROM t_pin ORDER BY id DESC LIMIT $posisi,$batas");
+    //}
+    //else{
+     // $tampil=mysql_query("SELECT * FROM berita 
+     //                      WHERE username='$_SESSION[namauser]'       
+      //                     ORDER BY id_berita DESC LIMIT $posisi,$batas");
+   // }
+  
+    $no = $posisi+1;
+    while($r=mysql_fetch_array($tampil)){
+      //$tgl_posting=tgl_indo($r[tanggal]);
+      echo "<tr><td>$no</td>
+                <td>$r[pin]</td>
+				<td>$r[kd_aktivasi]</td>";
+		if($r[status]=="aktif") {
+				echo"<td align=center>Aktif</td>";
+		} elseif($r[status]=="nonaktif") {
+				echo"<td align=center>Non-Aktif</td>";
+		}
+		
+		if($r[is_online]==0) {
+				echo"<td align=center><img src='icon/off1.png' height=16 weight=16></td>";
+		} elseif($r[is_online]==1) {
+				echo"<td align=center><img src='icon/on1.png' height=16 weight=16></td>";
+		}
+	  echo"<td><a href=?module=pin&act=editpin&id=$r[id]>Edit</a> | 
+		                <a href='$aksi?module=pin&act=hapus&id=$r[id]'>Hapus</a></td>
+		        </tr>";
+      $no++;
+    }
+    echo "</table>";
+
+    //if ($_SESSION[leveluser]=='admin'){
+      $jmldata = mysql_num_rows(mysql_query("SELECT * FROM t_pin"));
+   // }
+   // else{
+   //   $jmldata = mysql_num_rows(mysql_query("SELECT * FROM berita WHERE username='$_SESSION[namauser]'"));
+   // }  
+    $jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
+    $linkHalaman = $p->navHalaman($_GET[halaman], $jmlhalaman);
+
+    echo "<div id=paging>Hal: $linkHalaman</div><br>";
+ 
+    break;
+  
+  case "tambahpin":
+    echo "<h2>Tambah PIN PMB</h2>
+          <form method=POST action='$aksi?module=pin&act=input' enctype='multipart/form-data'>
+          <table>
+		  <tr><td>Nomer PIN PMB</td>     <td> : <input type=text name='pin_pmb' size=20></td></tr>
+		  <tr><td>Kode Aktivasi</td>     <td> : <input type=text name='kd_aktivasi' size=20></td></tr>
+		  <tr><td>Status</td>     <td> : 
+		  <select name='status'>
+            <option value=0 selected>- Pilih Status PIN -</option>
+			<option value=aktif>Aktif</option>
+			<option value=nonaktif>Non-Aktif</option>
+		  </select>
+          <tr><td colspan=2><input type=submit value=Simpan>
+                            <input type=button value=Batal onclick=self.history.back()></td></tr>
+          </table></form>";
+     break;
+    
+  case "editpin":
+    $edit = mysql_query("SELECT * FROM t_pin WHERE id='$_GET[id]'");
+    $r    = mysql_fetch_array($edit);
+
+    echo "<h2>Ubah Pin PMB</h2>
+          <form method=POST enctype='multipart/form-data' action=$aksi?module=pin&act=update>
+          <input type=hidden name=id value=$r[id]>
+          <table>
+          <tr><td>Nomer PIN PMB</td>     <td> : <input type=text name='pin_pmb' size=20 value='$r[pin]'></td></tr>
+		  <tr><td>Kode Aktivasi</td>     <td> : <input type=text name='kd_aktivasi' size=20 value='$r[kd_aktivasi]'></td></tr>";
+		  //<tr><td>Status</td>  <td> : 
+		  //<select name='status'>
+		  
+		  //$tampil=mysql_query("SELECT * FROM t_pin ORDER BY id");
+          //if ($r[status]==0){
+           // echo "<option value=0 selected>- Pilih Status Pin -</option>";
+          //}   
+
+         // while($w=mysql_fetch_array($tampil)){
+            //if ($r[status]==$w[status]){
+             // echo "<option value=$w[status] selected>Aktif</option>";
+            //}
+            //else{
+             // echo "<option value=$w[status]>Non-Aktif</option>";
+            //}
+          //}
+		  
+		 // if ($r[status]=="aktif"){
+            //  echo "<option value=aktif>Aktif</option>";
+           // }
+           // else{
+             // echo "<option value=nonaktif>Non-Aktif</option>";
+          //  }
+ 
+          /* $tampil=mysql_query("SELECT * FROM t_pin ORDER BY id");
+          if ($r[status]==0){
+            echo "<option value=0 selected>- Pilih Status PIN -</option>";
+          }
+		  elseif ($r[status]=="aktif")
+		  {
+              echo "<option value='aktif' selected>Aktif</option>";
+          }
+		  elseif ($r[status]=="nonaktif")
+		  {
+              echo "<option value='nonaktif' selected>Non-Aktif</option>";
+          } */
+    //</select></td></tr>
+		echo "  <tr><td colspan=2><input type=submit value=Update>
+                            <input type=button value=Batal onclick=self.history.back()></td></tr>
+         </table></form>";
+    break;  
+}
+}
+?>

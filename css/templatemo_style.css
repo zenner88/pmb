@@ -1,0 +1,14 @@
+/*
+Credit: http://www.templatemo.com
+*/
+
+#templatemo_main { clear: both; width: 1020px }
+
+#featured_project { width: 940px; height: 300px; padding: 25px 60px; margin-bottom: 30px; }
+
+#featured_project_box { width: 940px; height: 300px; padding: 25px 60px; margin-bottom: 30px; background: url(images/templatemo_featured_box.png) no-repeat center; }
+
+#featured_project h1 { color: #31302e; font-weight: bold; /* text-shadow: 1px 1px 1px #b0ada7; margin-bottom: 40px */}
+#featured_project .fp_img { width: 380px; height: 180px; float: left; position: relative; padding: 10px; }
+#featured_project .fp_img img { width: 380px; height: 180px }
+#featured_project .fp_img span { width: 400px; height: 200px; position: absolute; top: 0; left: 0; background: url(images/templatemo_featured_work.png) }

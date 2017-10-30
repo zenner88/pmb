@@ -1,0 +1,45 @@
+/* CSS Document
+* Author: ALi Marjan
+* website: http://aleezone.co.nr
+* Email: smartcodebender@gmail.com
+* Ini css untuk mempercantik bagian bawah.
+*/
+
+/*-------------- Navigasi buat bawahnya -----------------*/
+.botnav{
+	width:100%;
+	height:45px;
+	position: fixed;
+	bottom:0px;
+	background-image:url('../images/footerbar.png');
+	right: 0px;
+	background-repeat:repeat-x;
+	z-index:1;
+	color:#000000;
+}
+.botspacer{
+	height:38px;
+}
+.botnav a:link {
+	color: #EE1C24;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight:bold;
+}
+.botnav a:visited {
+	color: #EE1C24;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight:bold;
+}
+.botnav a:hover {
+	color: #FFF;
+	text-decoration: underline;
+	font-size: 12px;
+}
+.botnav a:active {
+	color: #FFB720;
+	text-decoration: none;
+	font-size: 12px;
+}
+/*-------------- Akhir dari style navigasi buat bawahnya -----------------*/

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Piecemaker>
+  <Contents>
+    <Image Source="sliding_photos/photo_01.jpg" Title="Photo One">
+		<Text>&lt;h1&gt;Selamat datang di kampus Politeknik Pos Indonesia&lt;/h1&gt;&lt;p&gt;Dengan luas bangunan 20.930 m2 yang dibangun di atas tanah seluas 44.406 m2, memiliki sejumlah sarana dan fasilitas yang sangat memadai untuk proses belajar mengajar dengan baik.&lt;/p&gt;</Text>
+		<Hyperlink URL="http://www.templatemo.com/page/1" Target="_blank" />
+	</Image>		
+    <Image Source="sliding_photos/photo_02.jpg" Title="Photo Two">
+      <Text>&lt;h1&gt;Fasilitas Penunjang&lt;/h1&gt;&lt;p&gt;Fasilitas penunjang terdiri dari fasilitas untuk olah raga (Gedung Olah Raga = GOR untuk basket, voli, bulu tangkis, dan tenis meja), lapangan olah raga tenis serta panjat dinding, dan masjid kampus. Fasilitas lainnya adalah internet gratis, dan akses perpustakaan yang tidak hanya akses perpustakaan Poltekpos tetapi juga perpustakaan perguruan tinggi lain yang ada kerjasama dengan Poltekpos seperti Unpad atau ITB. &lt;/p&gt;</Text>
+      <Hyperlink URL="http://www.templatemo.com/page/2" Target="_blank" />
+    </Image>
+	<Image Source="sliding_photos/photo_03.jpg" Title="Photo Three">
+      <Text>&lt;h1&gt;Fasilitas Pendidikan&lt;/h1&gt;&lt;p&gt;Lab komputer sebagai tempat praktik untuk melengkapi teori-teori yang telah diterima. Lab tersebut terdiri dari Lab. Jaringan, Lab. Sistem Informasi, Lab. Programing, Lab. Aplikasi, Lab. Basis Data, Lab. Multimedia, Lab. Simulasi. dan Lab Dasar. Lab Jurusan untuk kegiatan-kegiatan yang menunjang pembelajaran dalam bidang studi sesuai dengan Jurusan. Lab Bahasa Inggris, yang memungkinkan pengembangan bahasa Inggris mahasiswa untuk berkompetisi dalam lingkungan bisnis global. Ruangan kelas yang cukup representatif, dilengkapi dengan OHP atau LCD. Setiap kelas dibatasi sampai maksimal 45 orang sehingga proses belajar mengajar akan lebih efektif.
+ &lt;/p&gt;</Text>
+      <Hyperlink URL="http://www.templatemo.com/page/3" Target="_blank" />
+    </Image>
+	<Image Source="sliding_photos/photo_04.jpg" Title="Photo Four">
+      <Text>&lt;h1&gt;Fasilitas Penunjang&lt;/h1&gt;&lt;p&gt;&lt;h1&gt;Bagi mahasiswa yang berasal dari luar kota Bandung, dapat memanfaatkan asrama Poltekpos. Asrama yang berjumlah 3 buah yaitu asrama Melati, Anggrek dan Raflesia dapat menampung kurang lebih 800 orang mahasiswa. Namun untuk sementara ini, penggunaan asrama masih dibatasi untuk dua bulan pertama perkuliahan. Ke depan, seluruh mahasiswa diharapkan dapat memanfaatkan asrama ini paling tidak untuk satu semester sekaligus dalam rangka character building (pembentukan karakter) mahasiswa. Setelah itu mahasiswa diharapkan berbaur dengan masyarakat luar untuk belajar bersosiaisasi dan hidup bermasyarakat.&lt;/p&gt;</Text>
+      <Hyperlink URL="http://www.templatemo.com/page/4" Target="_blank" />
+    </Image>
+	
+	<Image Source="sliding_photos/photo_05.jpg" Title="Photo Five">
+		<Text>&lt;h1&gt;Selamat datang di kampus Politeknik Pos Indonesia&lt;/h1&gt;&lt;p&gt;Dengan luas bangunan 20.930 m2 yang dibangun di atas tanah seluas 44.406 m2, memiliki sejumlah sarana dan fasilitas yang sangat memadai untuk proses belajar mengajar dengan baik.&lt;/p&gt;</Text>
+		<Hyperlink URL="http://www.templatemo.com/page/1" Target="_blank" />
+	</Image>		
+    <Image Source="sliding_photos/photo_06.jpg" Title="Photo Six">
+      <Text>&lt;h1&gt;Fasilitas Penunjang&lt;/h1&gt;&lt;p&gt;Fasilitas penunjang terdiri dari fasilitas untuk olah raga (Gedung Olah Raga = GOR untuk basket, voli, bulu tangkis, dan tenis meja), lapangan olah raga tenis serta panjat dinding, dan masjid kampus. Fasilitas lainnya adalah internet gratis, dan akses perpustakaan yang tidak hanya akses perpustakaan Poltekpos tetapi juga perpustakaan perguruan tinggi lain yang ada kerjasama dengan Poltekpos seperti Unpad atau ITB. &lt;/p&gt;</Text>
+      <Hyperlink URL="http://www.templatemo.com/page/2" Target="_blank" />
+    </Image>
+	<Image Source="sliding_photos/photo_07.jpg" Title="Photo Seven">
+      <Text>&lt;h1&gt;Fasilitas Pendidikan&lt;/h1&gt;&lt;p&gt;Lab komputer sebagai tempat praktik untuk melengkapi teori-teori yang telah diterima. Lab tersebut terdiri dari Lab. Jaringan, Lab. Sistem Informasi, Lab. Programing, Lab. Aplikasi, Lab. Basis Data, Lab. Multimedia, Lab. Simulasi. dan Lab Dasar. Lab Jurusan untuk kegiatan-kegiatan yang menunjang pembelajaran dalam bidang studi sesuai dengan Jurusan. Lab Bahasa Inggris, yang memungkinkan pengembangan bahasa Inggris mahasiswa untuk berkompetisi dalam lingkungan bisnis global. Ruangan kelas yang cukup representatif, dilengkapi dengan OHP atau LCD. Setiap kelas dibatasi sampai maksimal 45 orang sehingga proses belajar mengajar akan lebih efektif.
+ &lt;/p&gt;</Text>
+      <Hyperlink URL="http://www.templatemo.com/page/3" Target="_blank" />
+    </Image>
+	<Image Source="sliding_photos/photo_08.jpg" Title="Photo Eight">
+      <Text>&lt;h1&gt;Fasilitas Penunjang&lt;/h1&gt;&lt;p&gt;&lt;h1&gt;Bagi mahasiswa yang berasal dari luar kota Bandung, dapat memanfaatkan asrama Poltekpos. Asrama yang berjumlah 3 buah yaitu asrama Melati, Anggrek dan Raflesia dapat menampung kurang lebih 800 orang mahasiswa. Namun untuk sementara ini, penggunaan asrama masih dibatasi untuk dua bulan pertama perkuliahan. Ke depan, seluruh mahasiswa diharapkan dapat memanfaatkan asrama ini paling tidak untuk satu semester sekaligus dalam rangka character building (pembentukan karakter) mahasiswa. Setelah itu mahasiswa diharapkan berbaur dengan masyarakat luar untuk belajar bersosiaisasi dan hidup bermasyarakat.&lt;/p&gt;</Text>
+      <Hyperlink URL="http://www.templatemo.com/page/4" Target="_blank" />
+    </Image>
+	<Image Source="sliding_photos/photo_09.jpg" Title="Photo Nine">
+      <Text>&lt;h1&gt;Fasilitas Penunjang&lt;/h1&gt;&lt;p&gt;&lt;h1&gt;Bagi mahasiswa yang berasal dari luar kota Bandung, dapat memanfaatkan asrama Poltekpos. Asrama yang berjumlah 3 buah yaitu asrama Melati, Anggrek dan Raflesia dapat menampung kurang lebih 800 orang mahasiswa. Namun untuk sementara ini, penggunaan asrama masih dibatasi untuk dua bulan pertama perkuliahan. Ke depan, seluruh mahasiswa diharapkan dapat memanfaatkan asrama ini paling tidak untuk satu semester sekaligus dalam rangka character building (pembentukan karakter) mahasiswa. Setelah itu mahasiswa diharapkan berbaur dengan masyarakat luar untuk belajar bersosiaisasi dan hidup bermasyarakat.&lt;/p&gt;</Text>
+      <Hyperlink URL="http://www.templatemo.com/page/4" Target="_blank" />
+    </Image>
+	<Image Source="sliding_photos/photo_10.jpg" Title="Photo Ten">
+      <Text>&lt;h1&gt;Fasilitas Penunjang&lt;/h1&gt;&lt;p&gt;&lt;h1&gt;Bagi mahasiswa yang berasal dari luar kota Bandung, dapat memanfaatkan asrama Poltekpos. Asrama yang berjumlah 3 buah yaitu asrama Melati, Anggrek dan Raflesia dapat menampung kurang lebih 800 orang mahasiswa. Namun untuk sementara ini, penggunaan asrama masih dibatasi untuk dua bulan pertama perkuliahan. Ke depan, seluruh mahasiswa diharapkan dapat memanfaatkan asrama ini paling tidak untuk satu semester sekaligus dalam rangka character building (pembentukan karakter) mahasiswa. Setelah itu mahasiswa diharapkan berbaur dengan masyarakat luar untuk belajar bersosiaisasi dan hidup bermasyarakat.&lt;/p&gt;</Text>
+      <Hyperlink URL="http://www.templatemo.com/page/4" Target="_blank" />
+    </Image>
+	
+  </Contents>
+  <Settings ImageWidth="940" ImageHeight="300" LoaderColor="0x333333" InnerSideColor="0x161616" SideShadowAlpha="0.8" DropShadowAlpha="0.8" DropShadowDistance="16" DropShadowScale="0.95" DropShadowBlurX="20" DropShadowBlurY="4" MenuDistanceX="20" MenuDistanceY="28" MenuColor1="0x777777" MenuColor2="0x333333" MenuColor3="0xAAAAAA" ControlSize="100" ControlDistance="20" ControlColor1="0x222222" ControlColor2="0xFFFFFF" ControlAlpha="0.8" ControlAlphaOver="0.95" ControlsX="880" ControlsY="240" ControlsAlign="center" TooltipHeight="30" TooltipColor="0x111111" TooltipTextY="5" TooltipTextStyle="P-Italic" TooltipTextColor="0xFFFFFF" TooltipMarginLeft="5" TooltipMarginRight="7" TooltipTextSharpness="50" TooltipTextThickness="-100" InfoWidth="400" InfoBackground="0xFFFFFF" InfoBackgroundAlpha="0.95" InfoMargin="15" InfoSharpness="0" InfoThickness="0" Autoplay="4" FieldOfView="45"></Settings>
+  <Transitions>
+    <Transition Pieces="6" Time="1.2" Transition="easeInOutQuart" Delay="0.09" DepthOffset="450" CubeDistance="40"></Transition>
+    <Transition Pieces="8" Time="1.4" Transition="easeInOutBack" Delay="0.08" DepthOffset="550" CubeDistance="30"></Transition>
+    <Transition Pieces="5" Time="1.2" Transition="easeInOutQuart" Delay="0.11" DepthOffset="500" CubeDistance="40"></Transition>
+    <Transition Pieces="7" Time="1.4" Transition="easeInOutBack" Delay="0.12" DepthOffset="650" CubeDistance="35"></Transition>
+  </Transitions>
+</Piecemaker>

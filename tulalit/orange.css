@@ -1,0 +1,40 @@
+body {
+font-size:small;
+margin: 0; padding: 0;
+color: #666666;	
+text-align: center;	
+}
+table
+{
+font-size:small;
+font-family:Verdana, 'Trebuchet MS', Arial, Sans-serif;
+}
+table .box {
+	border-collapse:collapse;
+	border-top:1px solid #FFCC99;
+	border-right:0;
+	margin-bottom:1em;
+}
+
+table .box th {
+	background:#FFCC99 url(th4.png) top repeat-x;
+	text-align:center;
+	font:bold 1em "Century Gothic",Arial,Helvetica,sans-serif;
+	border-bottom:1px solid #FFCC99;
+	border-left:0;
+	padding:.5em 25em;
+}
+table .box  #org {
+	background:#FFCC99 url(th4.png) top repeat-x;
+	text-align:center;
+	font:bold 1em "Century Gothic",Arial,Helvetica,sans-serif;
+	border-bottom:1px solid #FFCC99;
+	border-left:0;
+	padding:.5em 1 em;
+}
+table.box td{
+	color:#111;
+	border-bottom:1px solid #FFCC99;
+	border-left:0;
+	padding:.3em 1em;
+}
