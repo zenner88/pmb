@@ -1,1 +1,1 @@
-pmb
+Aplikasi Penerimaan Mahasiswa Baru
