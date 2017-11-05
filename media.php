@@ -1,7 +1,7 @@
 <?php 
 $root = "localhost:88/pmb/";
   // error_reporting(0);
-  // session_start();	
+  session_start();	
   include "config/koneksi.php";
   include "config/fungsi_indotgl.php";
   include "config/class_paging.php";
@@ -46,11 +46,88 @@ $root = "localhost:88/pmb/";
 	<script src="css/bootstrap/js/jquery-3.2.1.slim.min.js"></script>
 	<script src="css/bootstrap/js/popper.min.js"></script>
 	<script src="css/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery-1.11.1.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery.backstretch.min.js"></script>
+	<script src="assets/js/retina-1.1.0.min.js"></script>
+	<script src="assets/js/scripts.js"></script>
+	<script src="assets/js/bootstrap-datepicker.min.js"></script>
 	<script src="js/modernizr.custom.js"></script>
+	<script src="peserta/validation.js"></script>
 
 	<!-- HTML5 video player -->
 	<script src="js/video.min.js"></script>
 	<script>_V_.options.flash.swf = 'js/video-js.swf';</script>
+
+	<script language="JavaScript" type="text/JavaScript">
+ function showKab()
+ {
+ <?php
+ 
+ // membaca semua propinsi
+ $query = "SELECT * FROM t_prop";
+ $hasil = mysql_query($query);
+ 
+ // membuat if untuk masing-masing pilihan propinsi beserta isi option untuk combobox kedua
+ while ($data = mysql_fetch_array($hasil))
+ {
+   $idProp = $data['kd_prop'];
+
+   // membuat IF untuk masing-masing propinsi
+   echo "if (document.form_pmb.n_propinsi.value == \"".$idProp."\")";
+   echo "{";
+
+   // membuat option kabupaten untuk masing-masing propinsi
+   $query2 = "SELECT * FROM t_kab WHERE kd_prop = $idProp";
+   $hasil2 = mysql_query($query2);
+   $content = "document.getElementById('n_kabupaten').innerHTML = \"";
+   while ($data2 = mysql_fetch_array($hasil2))
+   {
+       $content .= "<option value='".$data2['kd_kab']."'>".$data2['nama_kab']."</option>";   
+   }
+   $content .= "\"";
+   echo $content;
+   echo "}\n";   
+ }
+
+ ?> 
+ }
+</script>
+<!-- -->
+<script language="JavaScript" type="text/JavaScript">
+ function showKab2()
+ {
+ <?php
+ 
+ // membaca semua propinsi
+ $query = "SELECT * FROM t_prop";
+ $hasil = mysql_query($query);
+ 
+ // membuat if untuk masing-masing pilihan propinsi beserta isi option untuk combobox kedua
+ while ($data = mysql_fetch_array($hasil))
+ {
+   $idProp = $data['kd_prop'];
+
+   // membuat IF untuk masing-masing propinsi
+   echo "if (document.form_pmb.n_prop_sma.value == \"".$idProp."\")";
+   echo "{";
+
+   // membuat option kabupaten untuk masing-masing propinsi
+   $query2 = "SELECT * FROM t_kab WHERE kd_prop = $idProp";
+   $hasil2 = mysql_query($query2);
+   $content = "document.getElementById('n_kab_sma').innerHTML = \"";
+   while ($data2 = mysql_fetch_array($hasil2))
+   {
+       $content .= "<option value='".$data2['kd_kab']."'>".$data2['nama_kab']."</option>";   
+   }
+   $content .= "\"";
+   echo $content;
+   echo "}\n";   
+ }
+
+ ?> 
+ }
+</script>
 	<style type="text/css">
 		@media print
 			{    
@@ -62,84 +139,70 @@ $root = "localhost:88/pmb/";
 	</style>
 <body>
 
-<header id="header" class="container clearfix no-print">
-
+<header id="" class="container clearfix no-print">
 	<a href="../index.php" id="logo">
 		<img src="img/logo.png" alt="SmartStart">
 	</a>
-
-	<nav id="main-nav">
-		
+	<nav id="main-nav">	
 		<ul>
-			<li class="current">
-				<a href="index.php" data-description="Beranda">Home</a>
-				
+			<li >
+				<a href="index.php">Home</a>	
 			</li>
-			<li>
-				<a href="#" data-description="Pilih Jurusan">Jurusan</a>
+			<li >
+				<a href="#">Jurusan</a>
 				<ul>
-<li><a href="#">POLTEKPOS</a>
-	<ul>
-		<li><a href="kategori-2-teknik informatika.html">D3 Teknik Informatika</a></li>
-		<li><a href="kategori-19-manajemen informatika.html">D3 Sistem Informasi Bisnis</a></li>
-		<li><a href="kategori-21-akuntansi.html">D3 Akuntansi</a></li>
-		<li><a href="berita-132-d3--manajemen-bisnis.html">D3 Manajemen Bisnis</a></li>
-		<li><a href="kategori-23-logistik bisnis.html">D3 Logistik Bisnis</a></li>
-		<li><a href="">D4 Logistik Bisnis</a></li>
-		<li><a href="kategori-1000-manajemen bisnis perusahaan.html">D4 Manajemen Bisnis</a></li>
-		<li><a href="berita-149-ti--d-iv.html">D4 Teknik Informatika</a></li>
-        <li><a href="">D4 Akuntansi Keuangan</a></li>
-        <li><a href="berita-159-program-sarjana-terapan-unggulan-logistik-bisnis.html">Program Sarjana Terapan Unggulan Logistik Bisnis</a></li>
-        <li><a href="berita-133-program-sarjana-terapan-unggulan-akuntansi-keuangan.html">Program Sarjana Terapan Unggulan Akuntansi Keuangan</a></li>
-	</ul>
-</li>                    
-<li><a href="#">STIMLOG</a>
-<ul>
-
-<li><a href="kategori-1009-manajemen-logistik.html">Manajemen Logistik</a>
-</li>
-<li><a href="kategori-1010-manajemen-transportasi.html">Manajemen Transportasi</a>
-</li>
-
-</ul>
-</li>
+					<li><a href="#">POLTEKPOS</a>
+					<ul>
+						<li><a href="kategori-2-teknik informatika.html">D3 Teknik Informatika</a></li>
+						<li><a href="kategori-19-manajemen informatika.html">D3 Sistem Informasi Bisnis</a></li>
+						<li><a href="kategori-21-akuntansi.html">D3 Akuntansi</a></li>
+						<li><a href="berita-132-d3--manajemen-bisnis.html">D3 Manajemen Bisnis</a></li>
+						<li><a href="kategori-23-logistik bisnis.html">D3 Logistik Bisnis</a></li>
+						<li><a href="">D4 Logistik Bisnis</a></li>
+						<li><a href="kategori-1000-manajemen bisnis perusahaan.html">D4 Manajemen Bisnis</a></li>
+						<li><a href="berita-149-ti--d-iv.html">D4 Teknik Informatika</a></li>
+						<li><a href="">D4 Akuntansi Keuangan</a></li>
+						<li><a href="berita-159-program-sarjana-terapan-unggulan-logistik-bisnis.html">Program Sarjana Terapan Unggulan Logistik Bisnis</a></li>
+						<li><a href="berita-133-program-sarjana-terapan-unggulan-akuntansi-keuangan.html">Program Sarjana Terapan Unggulan Akuntansi Keuangan</a></li>
+					</ul>
+					</li>                    
+					<li><a href="#">STIMLOG</a>
+					<ul>
+						<li><a href="kategori-1009-manajemen-logistik.html">Manajemen Logistik</a></li>
+						<li><a href="kategori-1010-manajemen-transportasi.html">Manajemen Transportasi</a></li>
+					</ul>
+					</li>
 				</ul>
 			</li>
-			<li>
-				<a href="#" data-description="Panduan pendaftaran PMB">Panduan</a>
+			<li >
+				<a href="#">Panduan</a>
 				<ul>
 					<li><a href="pmdk.html">PMDK</a></li>
                     <li><a href="reguler.html">REGULER</a></li>
-<li><a href="biaya.html">BIAYA PERKULIAHAN</a></li>
-<li><a href="#">DOWNLOAD</a>
-<ul>
-
-<li><a href="download/BROSUR_POLTEKPOS_STIMLOG_2016-2017.pdf">BROSUR POLTEKPOS & STIMLOG</a></li>
-<li><a href="download/BUKU PANDUAN PENDAFTARARAN PMB TA 2016-2017.pdf">BUKU PANDUAN PENDAFTARARAN PMB TA 2016-2017</a></li>
-<li><a href="download/FORMULIR PMB POLTEKPOS-STIMLOG.pdf">FORMULIR PMB POLTEKPOS-STIMLOG</a></li>
-<li><a href="download/Formulir Surat Pernyataan Her-Registrasi (Poltekpos).pdf">Formulir Surat Pernyataan Her-Registrasi (Poltekpos)</a></li>
-<li><a href="download/Formulir Surat Pernyataan Her-Registrasi (STIMLOG).pdf">Formulir Surat Pernyataan Her-Registrasi (STIMLOG)</a></li>
-<li><a href="download/BUKU PANDUAN HER-REGISTRASI PMB TA 2016-2017.pdf">BUKU PANDUAN HER-REGISTRASI PMB TA 2016-2017</a></li>
-
-</ul>
-</li>
-				</ul>
+					<li><a href="biaya.html">BIAYA PERKULIAHAN</a></li>
+					<li><a href="#">DOWNLOAD</a>
+					<ul>
+						<li><a href="download/BROSUR_POLTEKPOS_STIMLOG_2016-2017.pdf">BROSUR POLTEKPOS & STIMLOG</a></li>
+						<li><a href="download/BUKU PANDUAN PENDAFTARARAN PMB TA 2016-2017.pdf">BUKU PANDUAN PENDAFTARARAN PMB TA 2016-2017</a></li>
+						<li><a href="download/FORMULIR PMB POLTEKPOS-STIMLOG.pdf">FORMULIR PMB POLTEKPOS-STIMLOG</a></li>
+						<li><a href="download/Formulir Surat Pernyataan Her-Registrasi (Poltekpos).pdf">Formulir Surat Pernyataan Her-Registrasi (Poltekpos)</a></li>
+						<li><a href="download/Formulir Surat Pernyataan Her-Registrasi (STIMLOG).pdf">Formulir Surat Pernyataan Her-Registrasi (STIMLOG)</a></li>
+						<li><a href="download/BUKU PANDUAN HER-REGISTRASI PMB TA 2016-2017.pdf">BUKU PANDUAN HER-REGISTRASI PMB TA 2016-2017</a></li>
+					</ul>
 			</li>
-			<li>
-				<a href="pendaftaran" data-description="Pendaftaran Calon Mahasiswa Baru">Pendaftaran</a>
+			</ul>
+			</li>
+			<li >
+				<a href="pendaftaran">Pendaftaran</a>
 				
 			</li>
 			<li>
-							<button type="button" class="p-0" data-toggle="modal" data-target="#exampleModal">
-
+				<button type="button" class="p-0" data-toggle="modal" data-target="#exampleModal">
 				<a >Login</a>
 				</button>
-
 			</li>
 		</ul>
-
 	</nav><!-- end #main-nav -->
-	
 </header><!-- end #header -->
 
 <section id="content" class="container clearfix">
@@ -173,26 +236,10 @@ $root = "localhost:88/pmb/";
 
 		<div class="one-fourth last">
 
-			<span class="title">Stay connected Poltekpos</span>
-
-			<ul class="social-links">
-				<li class="twitter"><a href="https://mobile.twitter.com/poltekpos_pmb">Twitter</a></li>
-				<li class="facebook"><a href="https://www.facebook.com/pmb.poltekpos.ac.id">Facebook</a></li>
-				<!-- <li class="digg"><a href="#">Digg</a></li>
-				<li class="vimeo"><a href="#">Vimeo</a></li>
-				<li class="youtube"><a href="#">YouTube</a></li>
-				<li class="skype"><a href="#">Skype</a></li>-->
-			
-			</ul><!-- end .social-links -->
-
 				<span class="title">Stay connected STIMLOG</span>
 			<ul class="social-links">
 				<li class="twitter"><a href="https://mobile.twitter.com/stimlog_ind">Twitter</a></li>
 				<li class="facebook"><a href="https://www.facebook.com/pmb.stimlog">Facebook</a></li>
-				<!-- <li class="digg"><a href="#">Digg</a></li>
-				<li class="vimeo"><a href="#">Vimeo</a></li>
-				<li class="youtube"><a href="#">YouTube</a></li>
-				<li class="skype"><a href="#">Skype</a></li> -->
 			
 			</ul><!-- end .social-links -->
 			

@@ -1,5 +1,6 @@
 <?php
-session_start();
+// session_start();
+error_reporting(0);
 ?>
 <link type="text/css" rel="stylesheet" href="stail.css"/>
 <script type="text/javascript">
@@ -36,7 +37,7 @@ session_start();
     <div class="col-12 col-lg-5 text-right">Jalur Pendaftaran</div>
     <div class="col-12 col-lg-2 text-center">:</div>
     <div class="col-12 col-lg-5 text-left"><B>
-<?php if ($_SESSION['jalu']==1){echo "Regular";}elseif ($_SESSION['jalu']==2){echo "Undangan";}else{echo "PMDK";}?>
+<?php if ($_SESSION['jalu']==1){echo "Regular";}elseif ($_SESSION['jalu']==2){echo "Undangan";}elseif ($_SESSION['jalu']==3){echo "Jalur Prestasi/ PMDK";}elseif ($_SESSION['jalu']==4){echo "Jalur Mandiri";}else{echo "-";}?>
     </B></div>
     <div class="col-12 col-lg-5 text-right">Uang Pendaftaran</div>
     <div class="col-12 col-lg-2 text-center">:</div>

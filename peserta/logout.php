@@ -6,6 +6,6 @@ mysql_query("UPDATE `t_pin` SET `is_online` = '0' WHERE `t_pin`.`pin` ='$_SESSIO
   echo "<center>Anda telah sukses keluar sistem <b>[LOGOUT]<b>";
 ?>
 <script type="text/javascript">
-window.location = "/pmb/login"
+window.location = "/pmb-poltekpos/login"
 </script>
 

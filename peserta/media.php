@@ -77,6 +77,40 @@ else
  ?> 
  }
 </script>
+<script language="JavaScript" type="text/JavaScript">
+ function showKab2()
+ {
+ <?php
+ 
+ // membaca semua propinsi
+ $query = "SELECT * FROM t_prop";
+ $hasil = mysql_query($query);
+ 
+ // membuat if untuk masing-masing pilihan propinsi beserta isi option untuk combobox kedua
+ while ($data = mysql_fetch_array($hasil))
+ {
+   $idProp = $data['kd_prop'];
+
+   // membuat IF untuk masing-masing propinsi
+   echo "if (document.form_pmb.n_propinsi.value == \"".$idProp."\")";
+   echo "{";
+
+   // membuat option kabupaten untuk masing-masing propinsi
+   $query2 = "SELECT * FROM t_kab WHERE kd_prop = $idProp";
+   $hasil2 = mysql_query($query2);
+   $content = "document.getElementById('n_kabupaten').innerHTML = \"";
+   while ($data2 = mysql_fetch_array($hasil2))
+   {
+       $content .= "<option value='".$data2['kd_kab']."'>".$data2['nama_kab']."</option>";   
+   }
+   $content .= "\"";
+   echo $content;
+   echo "}\n";   
+ }
+
+ ?> 
+ }
+</script>
 <!-- -->
 <script language="JavaScript" type="text/JavaScript">
  function showKab2()

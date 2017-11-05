@@ -1,7 +1,7 @@
 <?php
 // $session_start();
 
-include "../config/koneksi.php";
+include "config/koneksi.php";
 $briva = mysql_escape_string($_POST["briva"]);
 $password =mysql_escape_string($_POST["password"]);
 

@@ -327,7 +327,7 @@ where t_daftar.kode_briva='$_SESSION[kode_briva]'");
 ?>
              <td width="140" class="bg-warning">
                Pilihan 1 *	  </td>
-                        <td width="386" class="bg-warning"><?PHP combo("n_pil1",$data1); ?></td>
+                        <td width="386" class="bg-warning"><?PHP combo("n_pil1",isset($data1)); ?></td>
         </tr>
            <tr>
              <td width="140" class="bg-warning">
@@ -1132,7 +1132,7 @@ echo "Anda Telah Melakukan Registrasi. Registrasi hanya dapat dilakukan satu kal
 
         <tr>
           <td width="140" class="bg-warning">
-            Propinsi<br>
+            Propinsiw<br>
           Kabupaten / Kota *	  </td>
 	              <td class="bg-warning">
 	                 <select class="validate-selection" name="n_propinsi" onChange="showKab()">
@@ -1268,7 +1268,7 @@ echo "Anda Telah Melakukan Registrasi. Registrasi hanya dapat dilakukan satu kal
 
            <tr>
              <td width="140" class="bg-warning">
-               Propinsi<br>
+               Propinsiw<br>
              Kabupaten / Kota *	  </td>
                         <td class="bg-warning">
 <select class="validate-selection" name="n_prop_sma" onChange="showKab2()">

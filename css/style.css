@@ -481,7 +481,7 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 				#main-nav a {
 					border-bottom: 1px solid transparent;
 					border-top: 6px solid transparent;
-					color: #3a3a3a;
+					color: #fff;
 					font-family: 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 					font-size: 12px;
 					font-weight: 800;
@@ -510,12 +510,11 @@ input.placeholder, textarea.placeholder { color: #b0b0b0; }
 				}
 
 					#main-nav a:hover, #main-nav .hover > a, #main-nav .current > a {
-						border-bottom-color: #f15a23;
-						border-top-color: #f15a23;
-						color: #f15a23;
+			
+						color: #fff;
 					}
 
-					#main-nav a:hover, #main-nav .hover > a, #main-nav .current > a { background: #f8f8f8; }
+					#main-nav a:hover, #main-nav .hover > a, #main-nav .current > a { background: #3a3a3a; }
 
 					.not-ie #main-nav .current:after {
 						background: #f15a23;
