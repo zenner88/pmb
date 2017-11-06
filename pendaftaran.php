@@ -72,6 +72,8 @@ include "config/koneksi.php";
 						<?PHP combo("n_pil1",isset($data1)); ?>
 						<label for="1">Pilihan Program Studi 2 *</label>
 						<?PHP combo("n_pil2",isset($data2)); ?>
+						<label for="1">Pilihan Program Studi 3 *</label>
+						<?PHP combo("n_pil3",isset($data3)); ?>
 					</div>
 					<div class="form-group">
 						<label  for="f1-nama">Nama Lengkap</label>
@@ -247,12 +249,22 @@ include "config/koneksi.php";
 	function validate_pil(data) {
 		var n_pil1=data.n_pil1;
 		var n_pil2=data.n_pil2;
-		
+		var n_pil3=data.n_pil3;		
 		if (n_pil1.value==n_pil2.value) {
 		if (n_pil1.value!=0) {
 		alert ("Pilihan 1 tidak boleh sama dengan Pilihan 2");
 		n_pil2.value=0;   }
+		}
+		if (n_pil1.value==n_pil3.value) {
+		if (n_pil1.value!=0) {
+		alert ("Pilihan 1 tidak boleh sama dengan Pilihan 3");
+		n_pil3.value=0;   }
 		}	
+		if (n_pil2.value==n_pil3.value) {
+		if (n_pil2.value!=0) {
+		alert ("Pilihan 2 tidak boleh sama dengan Pilihan 3");
+		n_pil3.value=0;   }
+		}
 	}
 </script>
 <script>
