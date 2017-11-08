@@ -197,9 +197,10 @@ $root = "localhost:88/pmb/";
 				
 			</li>
 			<li>
-				<button type="button" class="p-0" data-toggle="modal" data-target="#exampleModal">
+				<!-- <button type="button" class="p-0" data-toggle="modal" data-target="#exampleModal">
 				<a >Login</a>
-				</button>
+				</button> -->
+				<a href="login">Login</a>				
 			</li>
 		</ul>
 	</nav><!-- end #main-nav -->

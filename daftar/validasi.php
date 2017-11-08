@@ -76,7 +76,17 @@ $_SESSION['jalu']=$jalu;
 $_SESSION['pil1']=$n_pil1;
 $_SESSION['pil2']=$n_pil2;
 
-
+$ceking = mysql_query("select nis from t_daftar where nis=".$nis);
+$data = mysql_fetch_array($ceking);
+$var = $data['nis'];
+if ($var == $nis){
+    ?>
+<script type="text/javascript">
+    alert("NISN Anda sudah terdaftar...");
+    window.history.back();
+</script>
+  <?php
+}else{
 //simpan data ke database
 $query = mysql_query("insert into t_daftar (id_daftar, nama, nis, email, no_tlp, pilihan, jalur_pendaftaran, password, ypbpi, kode_briva, status, tgl_daftar, bukti_pembayaran, tgl_upload, username, jenis) values('', '$nama','$nis', '$email', '$no_tlp', '$pilihan', '$jalur_pendaftaran', '$password', '$ypbpi','$kode_briva','$bayar','$waktu_bayar','','','','')") or die(mysql_error());
 
@@ -90,6 +100,7 @@ if ($query) {
 <?php
 }else{
     echo"Ada yang salah coy...";
+}
 }
 ?>
 

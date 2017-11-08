@@ -1,12 +1,13 @@
 <?php
+error_reporting(0);
 include "../config/koneksi.php";
 function antiinjection($data){
   $filter_sql = mysql_real_escape_string(stripslashes(strip_tags(htmlspecialchars($data,ENT_QUOTES))));
   return $filter_sql;
 }
 
-$username = antiinjection($_POST[username]);
-$pass     = antiinjection(md5($_POST[password]));
+$username = antiinjection($_POST['username']);
+$pass     = antiinjection(md5($_POST['password']));
 
 $login=mysql_query("SELECT * FROM admins WHERE username='$username' AND password='$pass' AND blokir='N'");
 $ketemu=mysql_num_rows($login);
