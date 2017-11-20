@@ -207,7 +207,7 @@ include "config/koneksi.php";
 						<select multiple name="i_jur_sma"  id="i_jur_sma" class="validate-selection form-control">
 						<?php while ($row_agm=mysql_fetch_array($query_agm))
 						{;?>
-							<option value ="<?php echo $row_agm['KodeSMU'];?>"><?php echo $row_agm['Keterangan'];?></option>
+							<option value ="<?php echo $row_agm['Id_sma'];?>"><?php echo $row_agm['Keterangan'];?></option>
 							<?php }?>
 						</select>
 					</div>

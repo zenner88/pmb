@@ -1,3 +1,9 @@
+<style type="text/css" media="print">
+	@page {
+		size: auto;
+		margin: 0;
+	}
+</style>
 <?php
 error_reporting(0);
 session_start();
@@ -59,13 +65,13 @@ $n_prop_sma=$_POST['n_prop_sma'];
 $n_pil1=$_POST['n_pil1'];
 $n_pil2=$_POST['n_pil2'];
 $n_pil3=$_POST['n_pil3'];
-$i_temp_ujian=$_POST['i_temp_ujian'];
+$i_temp_ujian= $_POST['i_temp_ujian'];
 $c_inf=$_POST['c_inf'];
 //$q_sdp2=$_POST['q_sdp2'];
 //$e_prestasi=$_POST['e_prestasi'];
 $c_jalur=$_POST['c_jalur'];
 //$i_foto = $_POST['photo'];
-$i_agama = $_POST['i_agama'];
+$i_agama = $_POST['n_agama'];
 
 define ("MAX_SIZE","10024"); 
 function getExtension($str)
@@ -101,7 +107,7 @@ if ($image)
 			$errors=1;
 		}
  
-		$image_name=$_POST['pin'].'.'.$extension;
+		$image_name= $_POST['pin'].'.'.$extension;
 		$newname="../../foto/".$image_name;
  
 		$copied = copy($_FILES['photo']['tmp_name'], $newname);
@@ -110,17 +116,11 @@ if ($image)
  
 }
 
-replace_meta_chars(mysql_query("insert into t_calon_mahasiswa (i_registrasi,i_thn_akademik,c_gel,n_lengkap,n_jns_kelamin,n_temp_lahir,d_lahir,n_alamat,n_kabupaten,n_propinsi,
-c_pos,i_telp,i_hp,n_email,n_ortu,n_ibu,n_jabatan,nis,n_sma,i_jur_sma,n_alamat_sma,n_kab_sma,n_prop_sma,n_pil1,n_pil2,
-n_pil3,i_temp_ujian,c_inf,c_jalur,status,metode,n_agama,photo) values('$i_registrasi','$i_thn_akademik','$c_gel','$n_lengkap','$n_jns_kelamin','$n_temp_lahir','$d_lahir','$n_alamat','$n_kabupaten','$n_propinsi','$c_pos','$i_telp','$i_hp','$n_email','$n_ortu','$n_ibu','$n_jabatan','$nis','$n_sma','$i_jur_sma',
-'$n_alamat_sma','$n_kab_sma','$n_prop_sma','$n_pil1','$n_pil2','$n_pil3','$i_temp_ujian','$c_inf','$c_jalur','Registrasi','online','$i_agama','$image_name')"));
-replace_meta_chars(mysql_query("UPDATE t_pin SET `status` = 'aktif' WHERE t_pin.pin ='$i_registrasi' LIMIT 1 ;"));
+mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name' WHERE i_registrasi = '$i_registrasi'");
 
-$sql_tampil="select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_gel.jalur as jalur,t_tempat_ujian.namatmp as temp_ujian from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp where t_calon_mahasiswa.i_registrasi='$i_registrasi'";
-  $query_tampil=mysql_query($sql_tampil,$koneksi);
+$sql_tampil="SELECT * FROM t_calon_mahasiswa INNER JOIN t_gel ON t_calon_mahasiswa.c_gel = t_gel.KodeGel INNER JOIN t_tempat_ujian ON t_calon_mahasiswa.i_temp_ujian = t_tempat_ujian.KodeTmp WHERE t_calon_mahasiswa.i_registrasi ='$i_registrasi'";
+  $query_tampil=mysql_query("SELECT * FROM `t_calon_mahasiswa` INNER JOIN t_gel ON t_calon_mahasiswa.c_gel = t_gel.KodeGel INNER JOIN t_tempat_ujian ON t_calon_mahasiswa.i_temp_ujian = t_tempat_ujian.KodeTmp INNER JOIN jalur_pendaftaran ON t_calon_mahasiswa.c_jalur = jalur_pendaftaran.id WHERE t_calon_mahasiswa.i_registrasi = '$i_registrasi'");
   $row_tampil=mysql_fetch_array($query_tampil);
-	//D3
-	//pil 1
 	if ($row_tampil[n_pil1] =='01')
 	{
 		$pil1 = "D3 - Logistik Bisnis";
@@ -331,7 +331,7 @@ $sql_tampil="select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_gel.jalur as
 
 
 
-	echo "<table width='100%' border='0'>
+	echo "<table width='100%' border='0' id='tablePrint'>
   <tr>
    &nbsp
   </tr>
@@ -354,7 +354,7 @@ POLTEKPOS & STIMLOG
   <tr>
     <td width='20%'>Nama Peserta </td>
     <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[3]</td>
+    <td width='92%'>$row_tampil[n_lengkap]</td>
   </tr>
   <tr>
     <td width='20%'>NISN</td>
@@ -369,7 +369,7 @@ POLTEKPOS & STIMLOG
   <tr>
     <td>Jalur</td>
     <td>:</td>
-    <td>$row_tampil[jalur] - $row_tampil[nama_gel]</td>
+    <td>$row_tampil[jalur] - $row_tampil[NamaGel]</td>
   </tr>
   <tr>
     <td colspan='3'><B>PILIHAN PROGRAM STUDI</B></td>
@@ -403,11 +403,7 @@ http//: pmb.poltekpos.ac.id</li>
   </tr>
 </table>
 ";
-
-//}
-  //header('location:../../media.php?module='.$module);
-  echo "<center><input TYPE='button' onClick='window.print()' value='Cetak Bukti Pendaftaran'> Untuk Kembali klik <a href=../../media.php?module=$module><em>disini</em></a></center>";
-
+  echo "<div id='printpagebutton'><center><input type='button' value='Cetak Bukti Registrasi' onclick='printpage()'/>Untuk Kembali klik <a href=../../media.php?module=$module><em>disini</em></a></center></div>";
 }
 if ($module=='registrasi' AND $act=='addpmdk'){
 //if($_POST['pin'] and $_POST['i_thn_akademik'] and $_POST['c_gel'] and $_POST['n_lengkap'] and $_POST['n_jns_kelamin'] and $_POST['n_temp_lahir'] and $_POST['d_lahir'] and $_POST['n_alamat'] and $_POST['n_kabupaten'] and $_POST['n_propinsi'] and $_POST['c_pos'] and $_POST['i_telp'] and $_POST['i_hp'] and $_POST['n_email'] and $_POST['n_ortu'] and $_POST['n_instansi'] and $_POST['n_jabatan'] and $_POST['n_sma'] and $_POST['i_jur_sma'] and $_POST['n_alamat_sma'] and $_POST['n_kab_sma']and $_POST['n_prop_sma'] and $_POST['n_pil1'] and $_POST['n_pil2'] and $_POST['n_pil3'] and $_POST['i_temp_ujian'] and $_POST['c_inf'] and $_POST['q_sdp2'] and $_POST['e_prestasi'] and $_POST['c_jalur'])
@@ -441,6 +437,10 @@ $n_pil1=$_POST['n_pil1'];
 $n_pil2=$_POST['n_pil2'];
 $n_pil3=$_POST['n_pil3'];
 $q_sdp2=$_POST['q_sdp2'];
+$i_temp_ujian= $_POST['i_temp_ujian'];
+$c_inf=$_POST['c_inf'];
+//$q_sdp2=$_POST['q_sdp2'];
+//$e_prestasi=$_POST['e_prestasi'];
 $e_prestasi=$_POST['e_prestasi'];
 $rata2_XI_2=$_POST['rata2_XI_2'];
 $mtk_XI_2=$_POST['mtk_XI_2'];
@@ -450,7 +450,11 @@ $mtk_XII_1=$_POST['mtk_XII_1'];
 $ing_XII_1=$_POST['ing_XII_1'];
 $c_jalur=$_POST['c_jalur'];
 $i_foto = $_POST['photo'];
-$i_agama = $_POST['i_agama'];
+$i_agama = $_POST['n_agama'];
+$c_nilai_mtk_3 = $_POST['c_nilai_mtk_3'];
+$c_nilai_mtk_4 = $_POST['c_nilai_mtk_4'];
+$c_nilai_inggris_3 = $_POST['c_nilai_inggris_3'];
+$c_nilai_inggris_4 = $_POST['c_nilai_inggris_4'];
 
 define ("MAX_SIZE","10024"); 
 function getExtension($str)
@@ -563,17 +567,16 @@ if ($smt12)
 
 
 
-replace_meta_chars(mysql_query("insert into t_calon_mahasiswa (i_registrasi,i_thn_akademik,c_gel,n_lengkap,n_jns_kelamin,n_temp_lahir,d_lahir,n_alamat,n_kabupaten,n_propinsi,n_kota_lain,c_pos,i_telp,
+/*replace_meta_chars(mysql_query("insert into t_calon_mahasiswa (i_registrasi,i_thn_akademik,c_gel,n_lengkap,n_jns_kelamin,n_temp_lahir,d_lahir,n_alamat,n_kabupaten,n_propinsi,n_kota_lain,c_pos,i_telp,
 i_hp,n_email,n_ortu,n_ibu,n_jabatan,nis,n_sma,i_jur_sma,
 n_alamat_sma,n_kab_sma,n_prop_sma,n_pil1,n_pil2,
 n_pil3,i_temp_ujian,c_inf,q_sdp2,e_prestasi,c_jalur,status,metode,n_agama,photo,smt11,smt12) values('$i_registrasi','$i_thn_akademik','$c_gel','$n_lengkap','$n_jns_kelamin','$n_temp_lahir','$d_lahir','$n_alamat','$n_kabupaten','$n_propinsi','-','$c_pos','$i_telp',
 '$i_hp','$n_email','$n_ortu','$n_ibu','$n_jabatan','$nis','$n_sma','$i_jur_sma',
 '$n_alamat_sma','$n_kab_sma','$n_prop_sma','$n_pil1','$n_pil2',
 '$n_pil3','-','-','-','-','$c_jalur','Registrasi','online','$i_agama','$image_name','$image_name2','$image_name3')"));
-replace_meta_chars(mysql_query("UPDATE t_pin SET status = 'aktif' WHERE t_pin.pin ='$i_registrasi' LIMIT 1 ;"));
-
-$sql_tampil="select t_calon_mahasiswa.*,t_gel.namagel as nama_gel from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel where t_calon_mahasiswa.i_registrasi='$i_registrasi'";
-  $query_tampil=mysql_query($sql_tampil,$koneksi);
+replace_meta_chars(mysql_query("UPDATE t_pin SET status = 'aktif' WHERE t_pin.pin ='$i_registrasi' LIMIT 1 ;"));*/
+mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', mtk_XI_2 = '$c_nilai_mtk_3', ing_XI_2 = '$c_nilai_inggris_3', mtk_XII_1 = '$c_nilai_mtk_4', ing_XII_1 = '$c_nilai_inggris_4', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name', smt11 = '$image_name2', smt12 = '$image_name3' WHERE i_registrasi = '$i_registrasi'");
+$query_tampil=mysql_query("SELECT * FROM `t_calon_mahasiswa` INNER JOIN t_gel ON t_calon_mahasiswa.c_gel = t_gel.KodeGel INNER JOIN t_tempat_ujian ON t_calon_mahasiswa.i_temp_ujian = t_tempat_ujian.KodeTmp INNER JOIN jalur_pendaftaran ON t_calon_mahasiswa.c_jalur = jalur_pendaftaran.id WHERE t_calon_mahasiswa.i_registrasi = '$i_registrasi'");
   $row_tampil=mysql_fetch_array($query_tampil);
 
 	//D3
@@ -788,13 +791,14 @@ $sql_tampil="select t_calon_mahasiswa.*,t_gel.namagel as nama_gel from t_calon_m
 
 
 
-	echo "<table width='100%' border='0'>
+	echo "<table width='100%' border='0' id='tablePrint'>
   <tr>
    &nbsp
   </tr>
   <tr>
     <center><h1>BUKTI PENDAFTARAN ONLINE MAHASISWA BARU <br>
-POLTEKPOS & STIMLOG<h1></center>
+POLTEKPOS & STIMLOG
+<h1></center>
   </tr>
   <tr>
    &nbsp
@@ -810,7 +814,7 @@ POLTEKPOS & STIMLOG<h1></center>
   <tr>
     <td width='20%'>Nama Peserta </td>
     <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[3]</td>
+    <td width='92%'>$row_tampil[n_lengkap]</td>
   </tr>
   <tr>
     <td width='20%'>NISN</td>
@@ -825,7 +829,7 @@ POLTEKPOS & STIMLOG<h1></center>
   <tr>
     <td>Jalur</td>
     <td>:</td>
-    <td>$row_tampil[nama_gel]</td>
+    <td>$row_tampil[nama_jalur] - $row_tampil[NamaGel]</td>
   </tr>
   <tr>
     <td colspan='3'><B>PILIHAN PROGRAM STUDI</B></td>
@@ -852,17 +856,14 @@ POLTEKPOS & STIMLOG<h1></center>
 Sekretariat PMB Poltekpos-Stimlog<br />
 Jl. Sariasih No.54 Bandung 40151<br />
 Tlp: 022-2009562, 022-61693672, 022-93250092, Fax : 022-2011089<br />
-E-mail : info@poltekpos.ac.id / pmb.stimlog.ac.id<br />
+E-mail : info@poltekpos.ac.id,pmb@poltekpos.ac.id<br />
 http//: pmb.poltekpos.ac.id</li>
 </ul>			
 </td>
   </tr>
 </table>
 ";
-
-//}
-  //header('location:../../media.php?module='.$module);
-  echo "<center><input id='printpagebutton' type='button' value='Cetak Bukti Registrasi' onclick='printpage()'/>Untuk Kembali klik <a href=../../media.php?module=$module><em>disini</em></a></center>";
+  echo "<div id='printpagebutton'><center><input type='button' value='Cetak Bukti Registrasi' onclick='printpage()'/>Untuk Kembali klik <a href=../../media.php?module=$module><em>disini</em></a></center></div>";
 }
 
 if ($module=='registrasi' AND $act=='addundangan'){
@@ -902,7 +903,7 @@ $c_inf=$_POST['c_inf'];
 //$e_prestasi=$_POST['e_prestasi'];
 $c_jalur=$_POST['c_jalur'];
 //$i_foto = $_POST['photo'];
-$i_agama = $_POST['i_agama'];
+$i_agama = $_POST['n_agama'];
 
 define ("MAX_SIZE","10024"); 
 function getExtension($str)
@@ -981,16 +982,16 @@ if ($undangan)
  
 }
 
-replace_meta_chars(mysql_query("insert into t_calon_mahasiswa (i_registrasi,i_thn_akademik,c_gel,n_lengkap,n_jns_kelamin,n_temp_lahir,d_lahir,n_alamat,n_kabupaten,n_propinsi,
+mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name', smt11 = '$image_name2' WHERE i_registrasi = '$i_registrasi'");
+/*replace_meta_chars(mysql_query("insert into t_calon_mahasiswa (i_registrasi,i_thn_akademik,c_gel,n_lengkap,n_jns_kelamin,n_temp_lahir,d_lahir,n_alamat,n_kabupaten,n_propinsi,
 c_pos,i_telp,i_hp,n_email,n_ortu,n_ibu,n_jabatan,nis,n_sma,i_jur_sma,n_alamat_sma,n_kab_sma,n_prop_sma,n_pil1,n_pil2,
 n_pil3,i_temp_ujian,c_inf,c_jalur,status,metode,n_agama,photo,smt11) values('$i_registrasi','$i_thn_akademik','$c_gel','$n_lengkap','$n_jns_kelamin','$n_temp_lahir','$d_lahir','$n_alamat','$n_kabupaten','$n_propinsi','$c_pos','$i_telp','$i_hp','$n_email','$n_ortu','$n_ibu','$n_jabatan','$nis','$n_sma','$i_jur_sma',
 '$n_alamat_sma','$n_kab_sma','$n_prop_sma','$n_pil1','$n_pil2','$n_pil3','$i_temp_ujian','$c_inf','$c_jalur','Registrasi','online','$i_agama','$image_name','$image_name2')"));
 replace_meta_chars(mysql_query("UPDATE t_pin SET `status` = 'aktif' WHERE t_pin.pin ='$i_registrasi' LIMIT 1 ;"));
 
-replace_meta_chars(mysql_query("INSERT INTO t_kelulusan (i_registrasi,n_nama,kd_prodi) VALUES ('$i_registrasi','$n_lengkap','$n_pil1')"));
+replace_meta_chars(mysql_query("INSERT INTO t_kelulusan (i_registrasi,n_nama,kd_prodi) VALUES ('$i_registrasi','$n_lengkap','$n_pil1')"));*/
 
-$sql_tampil="select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_gel.jalur as jalur from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel  where t_calon_mahasiswa.i_registrasi='$i_registrasi'";
-  $query_tampil=mysql_query($sql_tampil,$koneksi);
+$query_tampil=mysql_query("SELECT * FROM `t_calon_mahasiswa` INNER JOIN t_gel ON t_calon_mahasiswa.c_gel = t_gel.KodeGel INNER JOIN t_tempat_ujian ON t_calon_mahasiswa.i_temp_ujian = t_tempat_ujian.KodeTmp INNER JOIN jalur_pendaftaran ON t_calon_mahasiswa.c_jalur = jalur_pendaftaran.id WHERE t_calon_mahasiswa.i_registrasi = '$i_registrasi'");
   $row_tampil=mysql_fetch_array($query_tampil);
 	//D3
 	//pil 1
@@ -1204,7 +1205,7 @@ $sql_tampil="select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_gel.jalur as
 
 
 
-	echo "<table width='100%' border='0'>
+	echo "<table width='100%' border='0' id='tablePrint'>
   <tr>
    &nbsp
   </tr>
@@ -1227,7 +1228,7 @@ POLTEKPOS & STIMLOG
   <tr>
     <td width='20%'>Nama Peserta </td>
     <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[3]</td>
+    <td width='92%'>$row_tampil[n_lengkap]</td>
   </tr>
   <tr>
     <td width='20%'>NISN</td>
@@ -1242,7 +1243,7 @@ POLTEKPOS & STIMLOG
   <tr>
     <td>Jalur</td>
     <td>:</td>
-    <td>$row_tampil[jalur] - $row_tampil[nama_gel]</td>
+    <td>$row_tampil[nama_jalur] - $row_tampil[NamaGel]</td>
   </tr>
   <tr>
     <td colspan='3'><B>PILIHAN PROGRAM STUDI</B></td>
@@ -1276,10 +1277,7 @@ http//: pmb.poltekpos.ac.id</li>
   </tr>
 </table>
 ";
-
-//}
-  //header('location:../../media.php?module='.$module);
-  echo "<center><input TYPE='button' onClick='window.print()' value='Cetak Bukti Pendaftaran'> Untuk Kembali klik <a href=../../media.php?module=$module><em>disini</em></a></center>";
+  echo "<div id='printpagebutton'><center><input type='button' value='Cetak Bukti Registrasi' onclick='printpage()'/>Untuk Kembali klik <a href=../../media.php?module=$module><em>disini</em></a></center></div>";
 
 }
 

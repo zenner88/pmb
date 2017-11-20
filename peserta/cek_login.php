@@ -1,6 +1,6 @@
 <?php
 // $session_start();
-
+error_reporting(0);
 include "config/koneksi.php";
 $briva = mysql_escape_string($_POST["briva"]);
 $password =mysql_escape_string($_POST["password"]);
@@ -23,14 +23,17 @@ session_start();
   // session_register(email);
   // session_register(nama);  
  // session_register("username");
+$queryjalur = mysql_query("SELECT * FROM jalur_pendaftaran WHERE id ='$r[jalur_pendaftaran]' AND status = '1'");
+$jalurdaftar = mysql_fetch_array($queryjalur);
  $_SESSION['kode_briva']=$r['kode_briva'];
- $_SESSION['jalur_pendaftaran']=$r['jalur_pendaftaran'];
+ $_SESSION['jalur_pendaftaran']= $jalurdaftar['nama_jalur'];
  $_SESSION['pilihan']=$r['pilihan']; 
   $_SESSION['password']=$r['password'];
   $_SESSION['nis']=$r['nis'];
    $_SESSION['no_tlp']=$r['no_tlp'];
     $_SESSION['email']=$r['email'];
 	 $_SESSION['nama']=$r['nama'];
+   $_SESSION['nis']= $r['nis'];
   $sqlTahun = mysql_query("SELECT *
 FROM `t_tahun_akademik` where status='on';");
 $row_tampil=mysql_fetch_array($sqlTahun);

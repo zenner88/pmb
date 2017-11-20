@@ -1,30 +1,4 @@
-
-<?php
-error_reporting(0);
-// session_start();
-include "../config/koneksi.php";
-include "config/recaptchalib.php";
-$publickey = "6Le8Tr4SAAAAAOwlk7qk8eZJ7i2gzWRXfK7r420n";
-$privatekey = "6Le8Tr4SAAAAAEpek74I8a--2ZC5j09NPQfCk1Ux";
- if (empty($_SESSION['kode_briva']) AND empty($_SESSION['password'])){
-  echo "<link href='style.css' rel='stylesheet' type='text/css'>
- <center>Untuk mengakses modul, Anda harus login <br>";
-  echo "<a href=../../index.php><b>LOGIN</b></a></center>";
-} else {
-  $aksi="modul/mod_registrasi/aksi_registrasi.php";
-  switch(isset($_GET['act'])) { 
-    default:
-    $cekdata = mysql_query("SELECT * FROM t_calon_mahasiswa INNER JOIN t_gel ON t_calon_mahasiswa.c_gel = t_gel.KodeGel INNER JOIN jalur_pendaftaran ON t_calon_mahasiswa.c_jalur = jalur_pendaftaran.id WHERE t_calon_mahasiswa.i_registrasi = '$_SESSION[kode_briva]'");
-    $rdata = mysql_fetch_array($cekdata);
-?>
-<h2>Registrasi PMB Online Politeknik Pos Indonesia</h2>
-<div style="color: red"><B>SEGERA ISI BIODATA!</B></div>
-<?php 
-  if ($_SESSION['jalur_pendaftaran'] == "Reguler") {
-    $sqlCek = mysql_query("select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_tempat_ujian.namatmp as temp_ujian from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp where t_calon_mahasiswa.i_registrasi='$_SESSION[kode_briva]'");
-    if(mysql_num_rows($sqlCek)==0) { 
-?>
-  <form method=POST name="form_pmb" enctype='multipart/form-data' action=<?php echo "$aksi?module=registrasi&act=addreguler"; ?> id="test">
+<form method=POST name="form_pmb" enctype='multipart/form-data' action=<?php echo "$aksi?module=registrasi&act=addundangan"; ?> id="test">
     <input type=hidden name="pin" value=<?php echo $_SESSION['kode_briva']; ?>>
     <input type="hidden" name="c_jalur" value="<?php echo $rdata['c_jalur'] ?>" />
     <input type="hidden" name="i_thn_akademik" value="<?PHP echo $rdata['i_thn_akademik']?>" />
@@ -381,9 +355,11 @@ $privatekey = "6Le8Tr4SAAAAAEpek74I8a--2ZC5j09NPQfCk1Ux";
             <input class="form-control" name='nama_info' type='text' id='nama_info' size='30' maxlength='60'>
           </div>
         </div>
-        <div class="col-md-12">
-          <b>Photo Peserta</b><br>
-              Upload photo Closeup terbaru Saudara/i ( Photo Resmi ) Ukuran 3x4</span>
+        <div class="col-md-4">
+          Upload Surat Undangan
+        </div>
+        <div class="col-md-8">
+          <input name="surat" size="40" maxlength="60" type="file" class="required">
         </div>
         <div class="col-md-4">
           Photo ( 3x4 )
@@ -452,45 +428,3 @@ $privatekey = "6Le8Tr4SAAAAAEpek74I8a--2ZC5j09NPQfCk1Ux";
   </div>
 
   </form>
-<?php
-    } else {
-      echo "Anda Telah Melakukan Registrasi. Registrasi hanya dapat dilakukan satu kali. Terimakasih !!!.";
-    } 
-?>
-<?php
-  }
-?>
-<?php 
-if ($_SESSION['jalur_pendaftaran'] == "Undangan") {
-    $sqlCek = mysql_query("select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_tempat_ujian.namatmp as temp_ujian from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp where t_calon_mahasiswa.i_registrasi='$_SESSION[kode_briva]'");
-    if(mysql_num_rows($sqlCek)==0) {
-?>
-
-<?php include 'undangan.php'; ?>
-
-<?php 
-} else {
-      echo "Anda Telah Melakukan Registrasi. Registrasi hanya dapat dilakukan satu kali. Terimakasih !!!.";
-    }
-?>
-<?php
-  }
-?>
-<?php 
-if ($_SESSION['jalur_pendaftaran'] == "Jalur Prestasi/ PMDK") {
-    $sqlCek = mysql_query("select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_tempat_ujian.namatmp as temp_ujian from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp where t_calon_mahasiswa.i_registrasi='$_SESSION[kode_briva]'");
-    if(mysql_num_rows($sqlCek)==0) {
-?>
-<?php include 'pmdk.php'; ?>
-<?php 
-} else {
-      echo "Anda Telah Melakukan Registrasi. Registrasi hanya dapat dilakukan satu kali. Terimakasih !!!.";
-    }
-?>
-<?php 
-}
-?>
-<?php
-  }
-}
-?>
