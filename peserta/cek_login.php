@@ -60,7 +60,7 @@ elseif (preg_match("/$udn/",($r['jalur_pendaftaran']))) {
   }
 ?>
 <script type="text/javascript">
-  window.location.replace("peserta/media.php?module=registrasi");
+  window.location.replace("peserta/media.php?module=home");
 </script>
 <?php
 }

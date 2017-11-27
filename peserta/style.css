@@ -1,8 +1,21 @@
 body{
-	font-family: Tahoma;
-    text-align: center; 
+	font-family: Tahoma; 
     margin: 0px;
-}         
+    background: #f9f9f9 !important;
+} 
+.content-home {
+	background: #fff;
+    box-shadow: 3px 3px 5px #f2f2fe;
+    height: 570px;
+    padding: 10px;
+}     
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+	border-top: 2px solid #000915;
+    border-radius: 0px;
+}
+.nav-pills > li > a {
+	border-radius: 0px;
+}
 #header {
 	position: relative;
 	background-image: url(images/back.gif);

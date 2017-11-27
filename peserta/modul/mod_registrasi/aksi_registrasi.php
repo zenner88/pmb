@@ -1,1285 +1,575 @@
-<style type="text/css" media="print">
-	@page {
-		size: auto;
-		margin: 0;
-	}
-</style>
 <?php
 error_reporting(0);
 session_start();
- if (empty($_SESSION['kode_briva']) AND empty($_SESSION['password'])){
+ if (empty($_SESSION['kode_briva']) AND empty($_SESSION['password']) AND empty($_SESSION['jalur_pendaftaran'])){
   echo "<link href='style.css' rel='stylesheet' type='text/css'>
  <center>Untuk mengakses modul, Anda harus login <br>";
   echo "<a href=../../index.php><b>LOGIN</b></a></center>";
 }
-else{
-include "../../../config/koneksi.php";
-include "../../config/antisqlinjection.php";
-?>
-<script type="text/javascript">
-    function printpage() {
-        //Get the print button and put it into a variable
-        var printButton = document.getElementById("printpagebutton");
-        //Set the print button visibility to 'hidden' 
-        printButton.style.visibility = 'hidden';
-        //Print the page content
-        window.print()
-        //Set the print button to 'visible' again 
-        //[Delete this line if you want it to stay hidden after printing]
-        printButton.style.visibility = 'visible';
-    }
-</script>
-<?php
-$module=$_GET[module];
-$act=$_GET[act];
+else {
 
-// Update profil
-if ($module=='registrasi' AND $act=='addreguler'){
-//if($_POST['pin'] and $_POST['i_thn_akademik'] and $_POST['c_gel'] and $_POST['n_lengkap'] and $_POST['n_jns_kelamin'] and $_POST['n_temp_lahir'] and $_POST['d_lahir'] and $_POST['n_alamat'] and $_POST['n_kabupaten'] and $_POST['n_propinsi'] and $_POST['c_pos'] and $_POST['i_telp'] and $_POST['i_hp'] and $_POST['n_email'] and $_POST['n_ortu'] and $_POST['n_jabatan'] and $_POST['n_sma'] and $_POST['i_jur_sma'] and $_POST['n_alamat_sma'] and $_POST['n_kab_sma']and $_POST['n_prop_sma'] and $_POST['n_pil1'] and $_POST['n_pil2'] and $_POST['n_pil3'] and $_POST['i_temp_ujian'] and $_POST['c_inf'] and $_POST['q_sdp2'] and $_POST['c_jalur'])
-//{
-$i_registrasi=$_POST['pin'];
-$i_thn_akademik=$_POST['i_thn_akademik'];
-$c_gel=$_POST['c_gel'];
-$n_lengkap=$_POST['n_lengkap'];
-$n_jns_kelamin=$_POST['n_jns_kelamin'];
-$n_temp_lahir=$_POST['n_temp_lahir'];
-$d_lahir=$_POST['d_lahir'];
-$n_alamat=$_POST['n_alamat'];
-$n_kabupaten=$_POST['n_kabupaten'];
-$n_propinsi=$_POST['n_propinsi'];
-//$n_kota_lain=$_POST['n_kota_lain'];
-$c_pos=$_POST['c_pos'];
-$i_telp=$_POST['i_telp'];
-$i_hp=$_POST['i_hp'];
-$n_email=$_POST['n_email'];
-$n_ortu=$_POST['n_ortu'];
-$n_ibu=$_POST['n_ibu'];
-//$n_instansi=$_POST['n_instansi'];
-$n_jabatan=$_POST['n_jabatan'];
-$nis=$_POST['nis'];
-$n_sma=$_POST['n_sma'];
-$i_jur_sma=$_POST['i_jur_sma'];
-$n_alamat_sma=$_POST['n_alamat_sma'];
-$n_kab_sma=$_POST['n_kab_sma'];
-$n_prop_sma=$_POST['n_prop_sma'];
-$n_pil1=$_POST['n_pil1'];
-$n_pil2=$_POST['n_pil2'];
-$n_pil3=$_POST['n_pil3'];
-$i_temp_ujian= $_POST['i_temp_ujian'];
-$c_inf=$_POST['c_inf'];
-//$q_sdp2=$_POST['q_sdp2'];
-//$e_prestasi=$_POST['e_prestasi'];
-$c_jalur=$_POST['c_jalur'];
-//$i_foto = $_POST['photo'];
-$i_agama = $_POST['n_agama'];
+ include "../../../config/koneksi.php";
+ include "../../config/antisqlinjection.php";
+ 
+ 	$module=$_GET[module];
+	$act=$_GET[act];
+	if ($module=='registrasi' AND $act=='addreguler'){ 
+		/*$sqlCek = mysql_query("select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_tempat_ujian.namatmp as temp_ujian from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp where t_calon_mahasiswa.i_registrasi='$_SESSION[kode_briva]'");
+    if(mysql_num_rows($sqlCek)==0) { 
 
-define ("MAX_SIZE","10024"); 
-function getExtension($str)
-{
-	 $i = strrpos($str,".");
-	 if (!$i) { return ""; }
-	 $l = strlen($str) - $i;
-	 $ext = substr($str,$i+1,$l);
-	 return $ext;
-}
- 
-$errors=0;
-$image=$_FILES['photo']['name'];
-if ($image) 
-{
-	$filename = stripslashes($_FILES['photo']['name']);
-	$extension = getExtension($filename);
-	$extension = strtolower($extension);
-	if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
-		&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
-		&& ($extension != "PNG") && ($extension != "GIF")) 
-	{
-		echo '<h3>Unknown extension!</h3>';
-		$errors=1;
-	}
-	else
-	{
-		$size=filesize($_FILES['photo']['tmp_name']);
- 
-		if ($size > MAX_SIZE*400000)
+    } else {
+
+    }*/
+		$i_registrasi=$_POST['pin'];
+		$i_thn_akademik=$_POST['i_thn_akademik'];
+		$c_gel=$_POST['c_gel'];
+		$n_lengkap=$_POST['n_lengkap'];
+		$n_jns_kelamin=$_POST['n_jns_kelamin'];
+		$n_temp_lahir=$_POST['n_temp_lahir'];
+		$d_lahir=$_POST['d_lahir'];
+		$n_alamat=$_POST['n_alamat'];
+		$n_kabupaten=$_POST['n_kabupaten'];
+		$n_propinsi=$_POST['n_propinsi'];
+
+		$c_pos=$_POST['c_pos'];
+		$i_telp=$_POST['i_telp'];
+		$i_hp=$_POST['i_hp'];
+		$n_email=$_POST['n_email'];
+		$n_ortu=$_POST['n_ortu'];
+		$n_ibu=$_POST['n_ibu'];
+		$n_jabatan=$_POST['n_jabatan'];
+		$nis=$_POST['nis'];
+		$n_sma=$_POST['n_sma'];
+		$i_jur_sma=$_POST['i_jur_sma'];
+		$n_alamat_sma=$_POST['n_alamat_sma'];
+		$n_kab_sma=$_POST['n_kab_sma'];
+		$n_prop_sma=$_POST['n_prop_sma'];
+		$n_pil1=$_POST['n_pil1'];
+		$n_pil2=$_POST['n_pil2'];
+		$n_pil3=$_POST['n_pil3'];
+		$i_temp_ujian= $_POST['i_temp_ujian'];
+		$c_inf=$_POST['c_inf'];
+		$c_jalur=$_POST['c_jalur'];
+		$i_agama = $_POST['n_agama'];
+		$nama_guru_bk = $_POST['n_guru_bk'];
+		$no_guru_bk = $_POST['n_hp_guru_bk'];
+		
+		define ("MAX_SIZE","10024"); 
+		function getExtension($str)
 		{
-			echo '<h4>You have exceeded the size limit!</h4>';
-			$errors=1;
+			 $i = strrpos($str,".");
+			 if (!$i) { return ""; }
+			 $l = strlen($str) - $i;
+			 $ext = substr($str,$i+1,$l);
+			 return $ext;
 		}
  
-		$image_name= $_POST['pin'].'.'.$extension;
-		$newname="../../foto/".$image_name;
- 
-		$copied = copy($_FILES['photo']['tmp_name'], $newname);
-		
-	}
- 
-}
-
-mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name' WHERE i_registrasi = '$i_registrasi'");
-
-$sql_tampil="SELECT * FROM t_calon_mahasiswa INNER JOIN t_gel ON t_calon_mahasiswa.c_gel = t_gel.KodeGel INNER JOIN t_tempat_ujian ON t_calon_mahasiswa.i_temp_ujian = t_tempat_ujian.KodeTmp WHERE t_calon_mahasiswa.i_registrasi ='$i_registrasi'";
-  $query_tampil=mysql_query("SELECT * FROM `t_calon_mahasiswa` INNER JOIN t_gel ON t_calon_mahasiswa.c_gel = t_gel.KodeGel INNER JOIN t_tempat_ujian ON t_calon_mahasiswa.i_temp_ujian = t_tempat_ujian.KodeTmp INNER JOIN jalur_pendaftaran ON t_calon_mahasiswa.c_jalur = jalur_pendaftaran.id WHERE t_calon_mahasiswa.i_registrasi = '$i_registrasi'");
-  $row_tampil=mysql_fetch_array($query_tampil);
-	if ($row_tampil[n_pil1] =='01')
-	{
-		$pil1 = "D3 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil1] =='02')
-	{
-			$pil1 = "D3 - Manajemen Bisnis";
-	}
-	if ($row_tampil[n_pil1] =='03')
-	{
-		$pil1 = "D3 - Manajemen Informatika";
-	}
-	
-	if($row_tampil[n_pil1] =='04')
-	{
-			$pil1 = "D3 - Teknik Informatika";
-	}
-	if($row_tampil[n_pil1] =='05')
-	{
-			$pil1 = "D3 - Akuntansi";
-	}
-	if($row_tampil[n_pil1] =='21')
-	{
-			$pil1 = "S1 - Manajemen Logistik";
-	}
-	if($row_tampil[n_pil1] =='22')
-	{
-			$pil1 = "S1 - Manajemen Transportasi";
-	}
-       
-       if($row_tampil[n_pil1] =='31')
-	{
-			$pil1 = "D3 - Akselerasi Teknik Informatika";
-	}
-	if($row_tampil[n_pil1] =='32')
-	{
-			$pil1 = "D3 - Akselerasi Akuntansi";
-	}
-	
-	if($row_tampil[n_pil1] =='34')
-	{
-			$pil1 = "D4 - CLC (Akselerasi Logistik Bisnis)";
-	}
-	if($row_tampil[n_pil1] =='35')
-	{
-			$pil1 = "D4 - CAC (Akselerasi Akuntansi)";
-	}
-
-	//---pil 2
-	if ($row_tampil[n_pil2] =='01')
-	{
-		$pil2 = "D3 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil2] =='02')
-	{
-			$pil2 = "D3 - Manajemen Bisnis";
-	}
-	if ($row_tampil[n_pil2] =='03')
-	{
-		$pil2 = "D3 - Manajemen Informatika";
-	}
-	
-	if($row_tampil[n_pil2] =='04')
-	{
-			$pil2 = "D3 - Teknik Informatika";
-	}
-	if($row_tampil[n_pil2] =='05')
-	{
-			$pil2 = "D3 - Akuntansi";
-	}
-	if($row_tampil[n_pil2] =='21')
-	{
-			$pil2 = "S1 - Manajemen Logistik";
-	}
-	if($row_tampil[n_pil2] =='22')
-	{
-			$pil2 = "S1 - Manajemen Transportasi";
-	}
-
-      if($row_tampil[n_pil2] =='31')
-	{
-			$pil2 = "D3 - Akselerasi Teknik Informatika";
-	}
-	if($row_tampil[n_pil2] =='32')
-	{
-			$pil2 = "D3 - Akselerasi Akuntansi";
-	}
-	
-	if($row_tampil[n_pil2] =='34')
-	{
-			$pil2 = "D4 - CLC (Akselerasi Logistik Bisnis)";
-	}
-	if($row_tampil[n_pil2] =='35')
-	{
-			$pil2 = "D4 - CAC (Akselerasi Akuntansi)";
-	}
-
-	//-- pil 3
-	if ($row_tampil[n_pil3] =='01')
-	{
-		$pil3 = "D3 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil3] =='02')
-	{
-			$pil3 = "D3 - Manajemen Bisnis";
-	}
-	if ($row_tampil[n_pil3] =='03')
-	{
-		$pil3 = "D3 - Manajemen Informatika";
-	}
-	
-	if($row_tampil[n_pil3] =='04')
-	{
-			$pil3 = "D3 - Teknik Informatika";
-	}
-	if($row_tampil[n_pil3] =='05')
-	{
-			$pil3 = "D3 - Akuntansi";
-	}
-	if($row_tampil[n_pil3] =='21')
-	{
-			$pil3 = "S1 - Manajemen Logistik";
-	}
-	if($row_tampil[n_pil3] =='22')
-	{
-			$pil3 = "S1 - Manajemen Transportasi";
-	}
-
-	if($row_tampil[n_pil3] =='31')
-	{
-			$pil3 = "D3 - Akselerasi Teknik Informatika";
-	}
-	if($row_tampil[n_pil3] =='32')
-	{
-			$pil3 = "D3 - Akselerasi Akuntansi";
-	}
-	
-	if($row_tampil[n_pil3] =='34')
-	{
-			$pil3 = "D4 - CLC (Akselerasi Logistik Bisnis)";
-	}
-	if($row_tampil[n_pil3] =='35')
-	{
-			$pil3 = "D4 - CAC (Akselerasi Akuntansi)";
-	}
-
-	//D4
-	//pil 1
-	if ($row_tampil[n_pil1] =='11')
-	{
-		$pil1 = "D4 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil1] =='12')
-	{
-			$pil1 = "D4 - Manajemen Perusahaan / Bisnis";
-	}
-	if ($row_tampil[n_pil1] =='13')
-	{
-		$pil1 = "D4 - Teknik Informatika";
-	}
-	
-	if($row_tampil[n_pil1] =='14')
-	{
-			$pil1 = "D4 - Akuntansi Keuangan";
-	}
-	//---pil 2
-	if ($row_tampil[n_pil2] =='11')
-	{
-		$pil2 = "D4 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil2] =='12')
-	{
-			$pil2 = "D4 - Manajemen Perusahaan / Bisnis";
-	}
-	if ($row_tampil[n_pil2] =='13')
-	{
-		$pil2 = "D4 - Teknik Informatika";
-	}
-	
-	if($row_tampil[n_pil2] =='14')
-	{
-			$pil2 = "D4 - Akuntansi Keuangan";
-	}
-	//-- pil 3
-	if ($row_tampil[n_pil3] =='11')
-	{
-		$pil3 = "D4 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil3] =='12')
-	{
-			$pil3 = "D4 - Manajemen Perusahaan / Bisnis";
-	}
-	if ($row_tampil[n_pil3] =='13')
-	{
-		$pil3 = "D4 - Teknik Informatika";
-	}
-	
-	if($row_tampil[n_pil3] =='14')
-	{
-			$pil3 = "D4 - Akuntansi Keuangan";
-	}
-
-
-
-	echo "<table width='100%' border='0' id='tablePrint'>
-  <tr>
-   &nbsp
-  </tr>
-  <tr>
-    <center><h1>BUKTI PENDAFTARAN ONLINE MAHASISWA BARU <br>
-POLTEKPOS & STIMLOG
-<h1></center>
-  </tr>
-  <tr>
-   &nbsp
-  </tr>
-  <tr>
-    <td colspan='3'><B>DATA PENDAFTAR</B></td>
-  </tr>
-  <tr>
-    <td width='5%'>No Pendaftaran </td>
-    <td width='1%'>:</td>
-    <td>$row_tampil[0]</td>
-  </tr>
-  <tr>
-    <td width='20%'>Nama Peserta </td>
-    <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[n_lengkap]</td>
-  </tr>
-  <tr>
-    <td width='20%'>NISN</td>
-    <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[nis]</td>
-  </tr>
-  <tr>
-    <td width='20%'>Email</td>
-    <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[n_email]</td>
-  </tr>
-  <tr>
-    <td>Jalur</td>
-    <td>:</td>
-    <td>$row_tampil[jalur] - $row_tampil[NamaGel]</td>
-  </tr>
-  <tr>
-    <td colspan='3'><B>PILIHAN PROGRAM STUDI</B></td>
-  </tr>
-  <tr>
-    <td>Pilihan 1 </td>
-    <td>:</td>
-    <td>$pil1</td>
-  </tr>
-  <tr>
-    <td>Pilihan 2 </td>
-    <td>:</td>
-    <td>$pil2</td>
-  </tr>
-  <tr>
-    <td>Pilihan 3 </td>
-    <td>:</td>
-    <td>$pil3</td>
-  </tr>
-  <tr>
-    <td colspan='3'><b>INFO LEBIH LANJUT HUBUNGI</b> : 
-<ul>
-<li>
-Sekretariat PMB Poltekpos-Stimlog<br />
-Jl. Sariasih No.54 Bandung 40151<br />
-Tlp: 022-2009562, 022-61693672, 022-93250092, Fax : 022-2011089<br />
-E-mail : info@poltekpos.ac.id,pmb@poltekpos.ac.id<br />
-http//: pmb.poltekpos.ac.id</li>
-</ul>			
-</td>
-  </tr>
-</table>
-";
-  echo "<div id='printpagebutton'><center><input type='button' value='Cetak Bukti Registrasi' onclick='printpage()'/>Untuk Kembali klik <a href=../../media.php?module=$module><em>disini</em></a></center></div>";
-}
-if ($module=='registrasi' AND $act=='addpmdk'){
-//if($_POST['pin'] and $_POST['i_thn_akademik'] and $_POST['c_gel'] and $_POST['n_lengkap'] and $_POST['n_jns_kelamin'] and $_POST['n_temp_lahir'] and $_POST['d_lahir'] and $_POST['n_alamat'] and $_POST['n_kabupaten'] and $_POST['n_propinsi'] and $_POST['c_pos'] and $_POST['i_telp'] and $_POST['i_hp'] and $_POST['n_email'] and $_POST['n_ortu'] and $_POST['n_instansi'] and $_POST['n_jabatan'] and $_POST['n_sma'] and $_POST['i_jur_sma'] and $_POST['n_alamat_sma'] and $_POST['n_kab_sma']and $_POST['n_prop_sma'] and $_POST['n_pil1'] and $_POST['n_pil2'] and $_POST['n_pil3'] and $_POST['i_temp_ujian'] and $_POST['c_inf'] and $_POST['q_sdp2'] and $_POST['e_prestasi'] and $_POST['c_jalur'])
-//{
-$i_registrasi=$_POST['pin'];
-$i_thn_akademik=$_POST['i_thn_akademik'];
-$c_gel=$_POST['c_gel'];
-$n_lengkap=$_POST['n_lengkap'];
-$n_jns_kelamin=$_POST['n_jns_kelamin'];
-$n_temp_lahir=$_POST['n_temp_lahir'];
-$d_lahir=$_POST['d_lahir'];
-$n_alamat=$_POST['n_alamat'];
-$n_kabupaten=$_POST['n_kabupaten'];
-$n_propinsi=$_POST['n_propinsi'];
-$n_kota_lain=$_POST['n_kota_lain'];
-$c_pos=$_POST['c_pos'];
-$i_telp=$_POST['i_telp'];
-$i_hp=$_POST['i_hp'];
-$n_email=$_POST['n_email'];
-$n_ortu=$_POST['n_ortu'];
-$n_ibu=$_POST['n_ibu'];
-$n_instansi=$_POST['n_instansi'];
-$n_jabatan=$_POST['n_jabatan'];
-$nis=$_POST['nis'];
-$n_sma=$_POST['n_sma'];
-$i_jur_sma=$_POST['i_jur_sma'];
-$n_alamat_sma=$_POST['n_alamat_sma'];
-$n_kab_sma=$_POST['n_kab_sma'];
-$n_prop_sma=$_POST['n_prop_sma'];
-$n_pil1=$_POST['n_pil1'];
-$n_pil2=$_POST['n_pil2'];
-$n_pil3=$_POST['n_pil3'];
-$q_sdp2=$_POST['q_sdp2'];
-$i_temp_ujian= $_POST['i_temp_ujian'];
-$c_inf=$_POST['c_inf'];
-//$q_sdp2=$_POST['q_sdp2'];
-//$e_prestasi=$_POST['e_prestasi'];
-$e_prestasi=$_POST['e_prestasi'];
-$rata2_XI_2=$_POST['rata2_XI_2'];
-$mtk_XI_2=$_POST['mtk_XI_2'];
-$ing_XI_2=$_POST['ing_XI_2'];
-$rata2_XII_1=$_POST['rata2_XII_1'];
-$mtk_XII_1=$_POST['mtk_XII_1'];
-$ing_XII_1=$_POST['ing_XII_1'];
-$c_jalur=$_POST['c_jalur'];
-$i_foto = $_POST['photo'];
-$i_agama = $_POST['n_agama'];
-$c_nilai_mtk_3 = $_POST['c_nilai_mtk_3'];
-$c_nilai_mtk_4 = $_POST['c_nilai_mtk_4'];
-$c_nilai_inggris_3 = $_POST['c_nilai_inggris_3'];
-$c_nilai_inggris_4 = $_POST['c_nilai_inggris_4'];
-
-define ("MAX_SIZE","10024"); 
-function getExtension($str)
-{
-	 $i = strrpos($str,".");
-	 if (!$i) { return ""; }
-	 $l = strlen($str) - $i;
-	 $ext = substr($str,$i+1,$l);
-	 return $ext;
-}
- 
-$errors=0;
-$image=$_FILES['photo']['name'];
-if ($image) 
-{
-	$filename = stripslashes($_FILES['photo']['name']);
-	$extension = getExtension($filename);
-	$extension = strtolower($extension);
-	if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
-		&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
-		&& ($extension != "PNG") && ($extension != "GIF")) 
-	{
-		echo '<h3>Unknown extension!</h3>';
-		$errors=1;
-	}
-	else
-	{
-		$size=filesize($_FILES['photo']['tmp_name']);
- 
-		if ($size > MAX_SIZE*10024)
-		{
-			echo '<h4>You have exceeded the size limit!</h4>';
-			$errors=1;
+		$errors=0;
+		if ($_SESSION['jalur_pendaftaran'] == "Reguler") {
+			$image=$_FILES['photo']['name'];
+			if ($image) {
+				$filename = stripslashes($_FILES['photo']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['photo']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*400000)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name= $_POST['nis'].'.'.$extension;
+					$newname="../../pi/jalur_pendaftaran/reguler/photo_pendaftar/".$image_name;
+			 
+					$copied = copy($_FILES['photo']['tmp_name'], $newname);
+					
+				}
+			}
+			mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name', nama_guru_bk = '$nama_guru_bk', no_guru_bk = '$no_guru_bk' WHERE i_registrasi = '$i_registrasi'");
+			$sqlCek = mysql_query("select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_tempat_ujian.namatmp as temp_ujian from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp where t_calon_mahasiswa.i_registrasi='$i_registrasi'");
+    		if(mysql_num_rows($sqlCek)==0) { 
+    			header('Location: ../../media.php?module=registrasi');
+    			die;
+    		} else {
+    			header('Location: ../../media.php?module=registrasi');
+    		}
 		}
- 
-		$image_name=$_POST['pin'].'.'.$extension;
-		$newname="../../foto/".$image_name;
- 
-		$copied = copy($_FILES['photo']['tmp_name'], $newname);
 		
-	}
- 
-}
-
-
-
-$smt11=$_FILES['smt11']['name'];
-if ($smt11) 
-{
-	$filename = stripslashes($_FILES['smt11']['name']);
-	$extension = getExtension($filename);
-	$extension = strtolower($extension);
-	if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
-		&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
-		&& ($extension != "PNG") && ($extension != "GIF")) 
-	{
-		echo '<h3>Unknown extension!</h3>';
-		$errors=1;
-	}
-	else
-	{
-		$size=filesize($_FILES['smt11']['tmp_name']);
- 
-		if ($size > MAX_SIZE*20024)
-		{
-			echo '<h4>You have exceeded the size limit!</h4>';
-			$errors=1;
+		if ($_SESSION['jalur_pendaftaran'] == "Undangan") {
+			$image=$_FILES['photo']['name'];
+			if ($image) {
+				$filename = stripslashes($_FILES['photo']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['photo']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*400000)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name= $_POST['nis'].'.'.$extension;
+					$newname="../../pi/jalur_pendaftaran/undangan/photo_pendaftar/".$image_name;
+			 
+					$copied = copy($_FILES['photo']['tmp_name'], $newname);
+					
+				}
+			}
+			$undangan=$_FILES['surat']['name'];
+			if ($undangan) {
+				$filename = stripslashes($_FILES['surat']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['surat']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*10024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name2=$_POST['nis'].'.'.$extension;
+					$undangan="../../pi/jalur_pendaftaran/undangan/surat_undangan/".$image_name2;
+			 
+					$copied = copy($_FILES['surat']['tmp_name'], $undangan);
+					
+				}
+			}
+			mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name', surat = '$image_name2', nama_guru_bk = '$nama_guru_bk', no_guru_bk = '$no_guru_bk' WHERE i_registrasi = '$i_registrasi'");
+			$sqlCek = mysql_query("select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_tempat_ujian.namatmp as temp_ujian from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp where t_calon_mahasiswa.i_registrasi='$i_registrasi'");
+    		if(mysql_num_rows($sqlCek)==0) { 
+    			header('Location: ../../media.php?module=registrasi');
+    			die;
+    		} else {
+    			header('Location: ../../media.php?module=registrasi');
+    		}
 		}
- 
-		$image_name2=$_POST['pin'].'.'.$extension;
-		$smt11="../../smt11/".$image_name2;
- 
-		$copied = copy($_FILES['smt11']['tmp_name'], $smt11);
-		
-	}
- 
-}
+		if ($_SESSION['jalur_pendaftaran'] == "Jalur Prestasi/ PMDK") {
+			$c_nilai_mtk_3 = $_POST['c_nilai_mtk_3'];
+			$c_nilai_mtk_4 = $_POST['c_nilai_mtk_4'];
+			$c_nilai_inggris_3 = $_POST['c_nilai_inggris_3'];
+			$c_nilai_inggris_4 = $_POST['c_nilai_inggris_4'];
+			$image=$_FILES['photo']['name'];
+			if ($image) {
+				$filename = stripslashes($_FILES['photo']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['photo']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*400000)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name= $_POST['nis'].'.'.$extension;
+					$newname="../../pi/jalur_pendaftaran/pmdk/photo_pendaftar/".$image_name;
+			 
+					$copied = copy($_FILES['photo']['tmp_name'], $newname);
+					
+				}
+			}
+			$smt11=$_FILES['smt11']['name'];
+			if ($smt11) 
+			{
+				$filename = stripslashes($_FILES['smt11']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['smt11']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name2=$_POST['nis'].'.'.$extension;
+					$smt11="../../pi/jalur_pendaftaran/pmdk/raport_semester_3/".$image_name2;
+			 
+					$copied = copy($_FILES['smt11']['tmp_name'], $smt11);
+					
+				}
+			 
+			}
 
-$smt12=$_FILES['smt12']['name'];
-if ($smt12) 
-{
-	$filename = stripslashes($_FILES['smt12']['name']);
-	$extension = getExtension($filename);
-	$extension = strtolower($extension);
-	if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
-		&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
-		&& ($extension != "PNG") && ($extension != "GIF")) 
-	{
-		echo '<h3>Unknown extension!</h3>';
-		$errors=1;
-	}
-	else
-	{
-		$size=filesize($_FILES['smt12']['tmp_name']);
- 
-		if ($size > MAX_SIZE*20024)
-		{
-			echo '<h4>You have exceeded the size limit!</h4>';
-			$errors=1;
+			$smt12=$_FILES['smt12']['name'];
+			if ($smt12) 
+			{
+				$filename = stripslashes($_FILES['smt12']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['smt12']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name3=$_POST['nis'].'.'.$extension;
+					$smt12="../../pi/jalur_pendaftaran/pmdk/raport_semester_4/".$image_name3;
+			 
+					$copied = copy($_FILES['smt12']['tmp_name'], $smt12);
+					
+				}
+			 
+			}
+			$surat_rekomendasi=$_FILES['surat_rekomendasi']['name'];
+			if ($surat_rekomendasi) 
+			{
+				$filename = stripslashes($_FILES['surat_rekomendasi']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['surat_rekomendasi']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name4=$_POST['nis'].'.'.$extension;
+					$surat_rekomendasi="../../pi/jalur_pendaftaran/pmdk/surat_rekomendasi/".$image_name4;
+			 
+					$copied = copy($_FILES['surat_rekomendasi']['tmp_name'], $surat_rekomendasi);
+					
+				}
+			 
+			}
+			$surat_sertifikasi=$_FILES['surat_sertifikasi']['name'];
+			if ($surat_sertifikasi) 
+			{
+				$filename = stripslashes($_FILES['surat_sertifikasi']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['surat_sertifikasi']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name5=$_POST['nis'].'.'.$extension;
+					$surat_sertifikasi="../../pi/jalur_pendaftaran/pmdk/sertifikat/".$image_name5;
+			 
+					$copied = copy($_FILES['surat_sertifikasi']['tmp_name'], $surat_sertifikasi);
+					
+				}
+			 
+			}
+			mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name', smt1 = '$image_name2', smt2 = '$image_name3', mtk_1 = '$c_nilai_mtk_3', mtk_2 = '$c_nilai_mtk_4', bing_1 = '$c_nilai_inggris_3', bing_2 = '$c_nilai_inggris_4', surat = '$image_name4', 'sertifikat' = '$image_name5', nama_guru_bk = '$nama_guru_bk', no_guru_bk = '$no_guru_bk' WHERE i_registrasi = '$i_registrasi'");
+			$sqlCek = mysql_query("select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_tempat_ujian.namatmp as temp_ujian from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp where t_calon_mahasiswa.i_registrasi='$i_registrasi'");
+    		if(mysql_num_rows($sqlCek)==0) { 
+    			header('Location: ../../media.php?module=registrasi');
+    			die;
+    		} else {
+    			header('Location: ../../media.php?module=registrasi');
+    		}
 		}
- 
-		$image_name3=$_POST['pin'].'.'.$extension;
-		$smt12="../../smt12/".$image_name3;
- 
-		$copied = copy($_FILES['smt12']['tmp_name'], $smt12);
-		
-	}
- 
-}
-
-
-
-/*replace_meta_chars(mysql_query("insert into t_calon_mahasiswa (i_registrasi,i_thn_akademik,c_gel,n_lengkap,n_jns_kelamin,n_temp_lahir,d_lahir,n_alamat,n_kabupaten,n_propinsi,n_kota_lain,c_pos,i_telp,
-i_hp,n_email,n_ortu,n_ibu,n_jabatan,nis,n_sma,i_jur_sma,
-n_alamat_sma,n_kab_sma,n_prop_sma,n_pil1,n_pil2,
-n_pil3,i_temp_ujian,c_inf,q_sdp2,e_prestasi,c_jalur,status,metode,n_agama,photo,smt11,smt12) values('$i_registrasi','$i_thn_akademik','$c_gel','$n_lengkap','$n_jns_kelamin','$n_temp_lahir','$d_lahir','$n_alamat','$n_kabupaten','$n_propinsi','-','$c_pos','$i_telp',
-'$i_hp','$n_email','$n_ortu','$n_ibu','$n_jabatan','$nis','$n_sma','$i_jur_sma',
-'$n_alamat_sma','$n_kab_sma','$n_prop_sma','$n_pil1','$n_pil2',
-'$n_pil3','-','-','-','-','$c_jalur','Registrasi','online','$i_agama','$image_name','$image_name2','$image_name3')"));
-replace_meta_chars(mysql_query("UPDATE t_pin SET status = 'aktif' WHERE t_pin.pin ='$i_registrasi' LIMIT 1 ;"));*/
-mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', mtk_XI_2 = '$c_nilai_mtk_3', ing_XI_2 = '$c_nilai_inggris_3', mtk_XII_1 = '$c_nilai_mtk_4', ing_XII_1 = '$c_nilai_inggris_4', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name', smt11 = '$image_name2', smt12 = '$image_name3' WHERE i_registrasi = '$i_registrasi'");
-$query_tampil=mysql_query("SELECT * FROM `t_calon_mahasiswa` INNER JOIN t_gel ON t_calon_mahasiswa.c_gel = t_gel.KodeGel INNER JOIN t_tempat_ujian ON t_calon_mahasiswa.i_temp_ujian = t_tempat_ujian.KodeTmp INNER JOIN jalur_pendaftaran ON t_calon_mahasiswa.c_jalur = jalur_pendaftaran.id WHERE t_calon_mahasiswa.i_registrasi = '$i_registrasi'");
-  $row_tampil=mysql_fetch_array($query_tampil);
-
-	//D3
-	//pil 1
-	if ($row_tampil[n_pil1] =='01')
-	{
-		$pil1 = "D3 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil1] =='02')
-	{
-			$pil1 = "D3 - Manajemen Bisnis";
-	}
-	if ($row_tampil[n_pil1] =='03')
-	{
-		$pil1 = "D3 - Manajemen Informatika";
-	}
-	
-	if($row_tampil[n_pil1] =='04')
-	{
-			$pil1 = "D3 - Teknik Informatika";
-	}
-	if($row_tampil[n_pil1] =='05')
-	{
-			$pil1 = "D3 - Akuntansi";
-	}
-	if($row_tampil[n_pil1] =='21')
-	{
-			$pil1 = "S1 - Manajemen Logistik";
-	}
-	if($row_tampil[n_pil1] =='22')
-	{
-			$pil1 = "S1 - Manajemen Transportasi";
-	}
-       
-       if($row_tampil[n_pil1] =='31')
-	{
-			$pil1 = "D3 - Akselerasi Teknik Informatika";
-	}
-	if($row_tampil[n_pil1] =='32')
-	{
-			$pil1 = "D3 - Akselerasi Akuntansi";
-	}
-	
-	if($row_tampil[n_pil1] =='34')
-	{
-			$pil1 = "D4 - CLC (Akselerasi Logistik Bisnis)";
-	}
-	if($row_tampil[n_pil1] =='35')
-	{
-			$pil1 = "D4 - CAC (Akselerasi Akuntansi)";
-	}
-
-	//---pil 2
-	if ($row_tampil[n_pil2] =='01')
-	{
-		$pil2 = "D3 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil2] =='02')
-	{
-			$pil2 = "D3 - Manajemen Bisnis";
-	}
-	if ($row_tampil[n_pil2] =='03')
-	{
-		$pil2 = "D3 - Manajemen Informatika";
-	}
-	
-	if($row_tampil[n_pil2] =='04')
-	{
-			$pil2 = "D3 - Teknik Informatika";
-	}
-	if($row_tampil[n_pil2] =='05')
-	{
-			$pil2 = "D3 - Akuntansi";
-	}
-	if($row_tampil[n_pil2] =='21')
-	{
-			$pil2 = "S1 - Manajemen Logistik";
-	}
-	if($row_tampil[n_pil2] =='22')
-	{
-			$pil2 = "S1 - Manajemen Transportasi";
-	}
-
-      if($row_tampil[n_pil2] =='31')
-	{
-			$pil2 = "D3 - Akselerasi Teknik Informatika";
-	}
-	if($row_tampil[n_pil2] =='32')
-	{
-			$pil2 = "D3 - Akselerasi Akuntansi";
-	}
-	
-	if($row_tampil[n_pil2] =='34')
-	{
-			$pil2 = "D4 - CLC (Akselerasi Logistik Bisnis)";
-	}
-	if($row_tampil[n_pil2] =='35')
-	{
-			$pil2 = "D4 - CAC (Akselerasi Akuntansi)";
-	}
-
-	//-- pil 3
-	if ($row_tampil[n_pil3] =='01')
-	{
-		$pil3 = "D3 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil3] =='02')
-	{
-			$pil3 = "D3 - Manajemen Bisnis";
-	}
-	if ($row_tampil[n_pil3] =='03')
-	{
-		$pil3 = "D3 - Manajemen Informatika";
-	}
-	
-	if($row_tampil[n_pil3] =='04')
-	{
-			$pil3 = "D3 - Teknik Informatika";
-	}
-	if($row_tampil[n_pil3] =='05')
-	{
-			$pil3 = "D3 - Akuntansi";
-	}
-	if($row_tampil[n_pil3] =='21')
-	{
-			$pil3 = "S1 - Manajemen Logistik";
-	}
-	if($row_tampil[n_pil3] =='22')
-	{
-			$pil3 = "S1 - Manajemen Transportasi";
-	}
-
-	if($row_tampil[n_pil3] =='31')
-	{
-			$pil3 = "D3 - Akselerasi Teknik Informatika";
-	}
-	if($row_tampil[n_pil3] =='32')
-	{
-			$pil3 = "D3 - Akselerasi Akuntansi";
-	}
-	
-	if($row_tampil[n_pil3] =='34')
-	{
-			$pil3 = "D4 - CLC (Akselerasi Logistik Bisnis)";
-	}
-	if($row_tampil[n_pil3] =='35')
-	{
-			$pil3 = "D4 - CAC (Akselerasi Akuntansi)";
-	}
-
-	//D4
-	//pil 1
-	if ($row_tampil[n_pil1] =='11')
-	{
-		$pil1 = "D4 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil1] =='12')
-	{
-			$pil1 = "D4 - Manajemen Perusahaan / Bisnis";
-	}
-	if ($row_tampil[n_pil1] =='13')
-	{
-		$pil1 = "D4 - Teknik Informatika";
-	}
-	
-	if($row_tampil[n_pil1] =='14')
-	{
-			$pil1 = "D4 - Akuntansi Keuangan";
-	}
-	//---pil 2
-	if ($row_tampil[n_pil2] =='11')
-	{
-		$pil2 = "D4 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil2] =='12')
-	{
-			$pil2 = "D4 - Manajemen Perusahaan / Bisnis";
-	}
-	if ($row_tampil[n_pil2] =='13')
-	{
-		$pil2 = "D4 - Teknik Informatika";
-	}
-	
-	if($row_tampil[n_pil2] =='14')
-	{
-			$pil2 = "D4 - Akuntansi Keuangan";
-	}
-	//-- pil 3
-	if ($row_tampil[n_pil3] =='11')
-	{
-		$pil3 = "D4 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil3] =='12')
-	{
-			$pil3 = "D4 - Manajemen Perusahaan / Bisnis";
-	}
-	if ($row_tampil[n_pil3] =='13')
-	{
-		$pil3 = "D4 - Teknik Informatika";
-	}
-	
-	if($row_tampil[n_pil3] =='14')
-	{
-			$pil3 = "D4 - Akuntansi Keuangan";
-	}
-
-
-
-	echo "<table width='100%' border='0' id='tablePrint'>
-  <tr>
-   &nbsp
-  </tr>
-  <tr>
-    <center><h1>BUKTI PENDAFTARAN ONLINE MAHASISWA BARU <br>
-POLTEKPOS & STIMLOG
-<h1></center>
-  </tr>
-  <tr>
-   &nbsp
-  </tr>
-  <tr>
-    <td colspan='3'><B>DATA PENDAFTAR</B></td>
-  </tr>
-  <tr>
-    <td width='5%'>No Pendaftaran </td>
-    <td width='1%'>:</td>
-    <td>$row_tampil[0]</td>
-  </tr>
-  <tr>
-    <td width='20%'>Nama Peserta </td>
-    <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[n_lengkap]</td>
-  </tr>
-  <tr>
-    <td width='20%'>NISN</td>
-    <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[nis]</td>
-  </tr>
-  <tr>
-    <td width='20%'>Email</td>
-    <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[n_email]</td>
-  </tr>
-  <tr>
-    <td>Jalur</td>
-    <td>:</td>
-    <td>$row_tampil[nama_jalur] - $row_tampil[NamaGel]</td>
-  </tr>
-  <tr>
-    <td colspan='3'><B>PILIHAN PROGRAM STUDI</B></td>
-  </tr>
-  <tr>
-    <td>Pilihan 1 </td>
-    <td>:</td>
-    <td>$pil1</td>
-  </tr>
-  <tr>
-    <td>Pilihan 2 </td>
-    <td>:</td>
-    <td>$pil2</td>
-  </tr>
-  <tr>
-    <td>Pilihan 3 </td>
-    <td>:</td>
-    <td>$pil3</td>
-  </tr>
-  <tr>
-    <td colspan='3'><b>INFO LEBIH LANJUT HUBUNGI</b> : 
-<ul>
-<li>
-Sekretariat PMB Poltekpos-Stimlog<br />
-Jl. Sariasih No.54 Bandung 40151<br />
-Tlp: 022-2009562, 022-61693672, 022-93250092, Fax : 022-2011089<br />
-E-mail : info@poltekpos.ac.id,pmb@poltekpos.ac.id<br />
-http//: pmb.poltekpos.ac.id</li>
-</ul>			
-</td>
-  </tr>
-</table>
-";
-  echo "<div id='printpagebutton'><center><input type='button' value='Cetak Bukti Registrasi' onclick='printpage()'/>Untuk Kembali klik <a href=../../media.php?module=$module><em>disini</em></a></center></div>";
-}
-
-if ($module=='registrasi' AND $act=='addundangan'){
-//if($_POST['pin'] and $_POST['i_thn_akademik'] and $_POST['c_gel'] and $_POST['n_lengkap'] and $_POST['n_jns_kelamin'] and $_POST['n_temp_lahir'] and $_POST['d_lahir'] and $_POST['n_alamat'] and $_POST['n_kabupaten'] and $_POST['n_propinsi'] and $_POST['c_pos'] and $_POST['i_telp'] and $_POST['i_hp'] and $_POST['n_email'] and $_POST['n_ortu'] and $_POST['n_jabatan'] and $_POST['n_sma'] and $_POST['i_jur_sma'] and $_POST['n_alamat_sma'] and $_POST['n_kab_sma']and $_POST['n_prop_sma'] and $_POST['n_pil1'] and $_POST['n_pil2'] and $_POST['n_pil3'] and $_POST['i_temp_ujian'] and $_POST['c_inf'] and $_POST['q_sdp2'] and $_POST['c_jalur'])
-//{
-$i_registrasi=$_POST['pin'];
-$i_thn_akademik=$_POST['i_thn_akademik'];
-$c_gel=$_POST['c_gel'];
-$n_lengkap=$_POST['n_lengkap'];
-$n_jns_kelamin=$_POST['n_jns_kelamin'];
-$n_temp_lahir=$_POST['n_temp_lahir'];
-$d_lahir=$_POST['d_lahir'];
-$n_alamat=$_POST['n_alamat'];
-$n_kabupaten=$_POST['n_kabupaten'];
-$n_propinsi=$_POST['n_propinsi'];
-//$n_kota_lain=$_POST['n_kota_lain'];
-$c_pos=$_POST['c_pos'];
-$i_telp=$_POST['i_telp'];
-$i_hp=$_POST['i_hp'];
-$n_email=$_POST['n_email'];
-$n_ortu=$_POST['n_ortu'];
-$n_ibu=$_POST['n_ibu'];
-//$n_instansi=$_POST['n_instansi'];
-$n_jabatan=$_POST['n_jabatan'];
-$nis=$_POST['nis'];
-$n_sma=$_POST['n_sma'];
-$i_jur_sma=$_POST['i_jur_sma'];
-$n_alamat_sma=$_POST['n_alamat_sma'];
-$n_kab_sma=$_POST['n_kab_sma'];
-$n_prop_sma=$_POST['n_prop_sma'];
-$n_pil1=$_POST['n_pil1'];
-$n_pil2=$_POST['n_pil2'];
-$n_pil3=$_POST['n_pil3'];
-$i_temp_ujian=$_POST['i_temp_ujian'];
-$c_inf=$_POST['c_inf'];
-//$q_sdp2=$_POST['q_sdp2'];
-//$e_prestasi=$_POST['e_prestasi'];
-$c_jalur=$_POST['c_jalur'];
-//$i_foto = $_POST['photo'];
-$i_agama = $_POST['n_agama'];
-
-define ("MAX_SIZE","10024"); 
-function getExtension($str)
-{
-	 $i = strrpos($str,".");
-	 if (!$i) { return ""; }
-	 $l = strlen($str) - $i;
-	 $ext = substr($str,$i+1,$l);
-	 return $ext;
-}
- 
-$errors=0;
-$image=$_FILES['photo']['name'];
-if ($image) 
-{
-	$filename = stripslashes($_FILES['photo']['name']);
-	$extension = getExtension($filename);
-	$extension = strtolower($extension);
-	if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
-		&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
-		&& ($extension != "PNG") && ($extension != "GIF")) 
-	{
-		echo '<h3>Unknown extension!</h3>';
-		$errors=1;
-	}
-	else
-	{
-		$size=filesize($_FILES['photo']['tmp_name']);
- 
-		if ($size > MAX_SIZE*10024)
-		{
-			echo '<h4>You have exceeded the size limit!</h4>';
-			$errors=1;
+		if ($_SESSION['jalur_pendaftaran'] == "Jalur Mandiri") {
+			$image=$_FILES['photo']['name'];
+			if ($image) {
+				$filename = stripslashes($_FILES['photo']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['photo']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*400000)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name= $_POST['nis'].'.'.$extension;
+					$newname="../../pi/jalur_pendaftaran/mandiri/photo_pendaftar/".$image_name;
+			 
+					$copied = copy($_FILES['photo']['tmp_name'], $newname);
+					
+				}
+			}
+			$smt11=$_FILES['smt11']['name'];
+			if ($smt11) 
+			{
+				$filename = stripslashes($_FILES['smt11']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['smt11']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name2=$_POST['nis'].'.'.$extension;
+					$smt11="../../pi/jalur_pendaftaran/mandiri/raport_semester_1/".$image_name2;
+			 
+					$copied = copy($_FILES['smt11']['tmp_name'], $smt11);
+					
+				}
+			 
+			}
+			$smt12=$_FILES['smt12']['name'];
+			if ($smt12) 
+			{
+				$filename = stripslashes($_FILES['smt12']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['smt12']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name3=$_POST['nis'].'.'.$extension;
+					$smt12="../../pi/jalur_pendaftaran/mandiri/raport_semester_2/".$image_name3;
+			 
+					$copied = copy($_FILES['smt12']['tmp_name'], $smt12);
+					
+				}
+			 
+			}
+			$smt13=$_FILES['smt13']['name'];
+			if ($smt13) 
+			{
+				$filename = stripslashes($_FILES['smt13']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['smt13']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name4=$_POST['nis'].'.'.$extension;
+					$smt13="../../pi/jalur_pendaftaran/mandiri/raport_semester_3/".$image_name4;
+			 
+					$copied = copy($_FILES['smt13']['tmp_name'], $smt13);
+					
+				}
+			 
+			}
+			$smt14=$_FILES['smt14']['name'];
+			if ($smt14) 
+			{
+				$filename = stripslashes($_FILES['smt14']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['smt14']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name5=$_POST['nis'].'.'.$extension;
+					$smt14="../../pi/jalur_pendaftaran/mandiri/raport_semester_4/".$image_name5;
+			 
+					$copied = copy($_FILES['smt14']['tmp_name'], $smt14);
+					
+				}
+			 
+			}
+			$smt15=$_FILES['smt15']['name'];
+			if ($smt15) 
+			{
+				$filename = stripslashes($_FILES['smt15']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['smt15']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name6=$_POST['nis'].'.'.$extension;
+					$smt15="../../pi/jalur_pendaftaran/mandiri/raport_semester_5/".$image_name6;
+			 
+					$copied = copy($_FILES['smt15']['tmp_name'], $smt15);
+					
+				}
+			 
+			}
+			$surat_kelulusan=$_FILES['surat_kelulusan']['name'];
+			if ($surat_kelulusan) 
+			{
+				$filename = stripslashes($_FILES['surat_kelulusan']['name']);
+				$extension = getExtension($filename);
+				$extension = strtolower($extension);
+				if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
+					&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
+					&& ($extension != "PNG") && ($extension != "GIF")) 
+				{
+					echo '<h3>Unknown extension!</h3>';
+					$errors=1;
+				}
+				else
+				{
+					$size=filesize($_FILES['surat_kelulusan']['tmp_name']);
+			 
+					if ($size > MAX_SIZE*20024)
+					{
+						echo '<h4>You have exceeded the size limit!</h4>';
+						$errors=1;
+					}
+			 
+					$image_name7=$_POST['nis'].'.'.$extension;
+					$surat_kelulusan="../../pi/jalur_pendaftaran/mandiri/surat_kelulusan/".$image_name7;
+			 
+					$copied = copy($_FILES['surat_kelulusan']['tmp_name'], $surat_kelulusan);
+					
+				}
+			 
+			}
+			mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name', smt1 = '$image_name2', smt2 = '$image_name3', smt3 = '$image_name4', smt4 = '$image_name5', smt5 = '$image_name6', surat = '$image_name7', nama_guru_bk = '$nama_guru_bk', no_guru_bk = '$no_guru_bk' WHERE i_registrasi = '$i_registrasi'");
+			$sqlCek = mysql_query("select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_tempat_ujian.namatmp as temp_ujian from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp where t_calon_mahasiswa.i_registrasi='$i_registrasi'");
+    		if(mysql_num_rows($sqlCek)==0) { 
+    			header('Location: ../../media.php?module=registrasi');
+    			die;
+    		} else {
+    			header('Location: ../../media.php?module=registrasi');
+    		}
 		}
- 
-		$image_name=$_POST['pin'].'.'.$extension;
-		$newname="../../foto/".$image_name;
- 
-		$copied = copy($_FILES['photo']['tmp_name'], $newname);
-		
-	}
- 
-}
 
-
-
-$undangan=$_FILES['surat']['name'];
-if ($undangan) 
-{
-	$filename = stripslashes($_FILES['surat']['name']);
-	$extension = getExtension($filename);
-	$extension = strtolower($extension);
-	if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") 
-		&& ($extension != "gif")&& ($extension != "JPG") && ($extension != "JPEG") 
-		&& ($extension != "PNG") && ($extension != "GIF")) 
-	{
-		echo '<h3>Unknown extension!</h3>';
-		$errors=1;
+	} else {
+		header('media.php?module=registrasi');
+		die;
 	}
-	else
-	{
-		$size=filesize($_FILES['surat']['tmp_name']);
- 
-		if ($size > MAX_SIZE*10024)
-		{
-			echo '<h4>You have exceeded the size limit!</h4>';
-			$errors=1;
-		}
- 
-		$image_name2=$_POST['pin'].'.'.$extension;
-		$undangan="../../surat/".$image_name2;
- 
-		$copied = copy($_FILES['surat']['tmp_name'], $smt11);
-		
-	}
- 
-}
-
-mysql_query("UPDATE t_calon_mahasiswa SET i_thn_akademik = '$i_thn_akademik', c_gel = '$c_gel', n_lengkap = '$n_lengkap', n_jns_kelamin = '$n_jns_kelamin', n_temp_lahir = '$n_temp_lahir', d_lahir = '$d_lahir', n_alamat = '$n_alamat', n_kabupaten = '$n_kabupaten', n_propinsi = '$n_propinsi', c_pos = '$c_pos', i_telp = '$i_telp', i_hp = '$i_hp', n_email = '$n_email', n_ortu = '$n_ortu', n_ibu = '$n_ibu', n_jabatan = '$n_jabatan', nis = '$nis', n_sma = '$n_sma', i_jur_sma = '$i_jur_sma', n_alamat_sma = '$n_alamat_sma', n_kab_sma = '$n_kab_sma', n_prop_sma = '$n_prop_sma', n_pil1 = '$n_pil1', n_pil2 = '$n_pil2', n_pil3 = '$n_pil3', i_temp_ujian = '$i_temp_ujian', c_inf = '$c_inf', c_jalur = '$c_jalur', n_agama = '$i_agama', photo = '$image_name', smt11 = '$image_name2' WHERE i_registrasi = '$i_registrasi'");
-/*replace_meta_chars(mysql_query("insert into t_calon_mahasiswa (i_registrasi,i_thn_akademik,c_gel,n_lengkap,n_jns_kelamin,n_temp_lahir,d_lahir,n_alamat,n_kabupaten,n_propinsi,
-c_pos,i_telp,i_hp,n_email,n_ortu,n_ibu,n_jabatan,nis,n_sma,i_jur_sma,n_alamat_sma,n_kab_sma,n_prop_sma,n_pil1,n_pil2,
-n_pil3,i_temp_ujian,c_inf,c_jalur,status,metode,n_agama,photo,smt11) values('$i_registrasi','$i_thn_akademik','$c_gel','$n_lengkap','$n_jns_kelamin','$n_temp_lahir','$d_lahir','$n_alamat','$n_kabupaten','$n_propinsi','$c_pos','$i_telp','$i_hp','$n_email','$n_ortu','$n_ibu','$n_jabatan','$nis','$n_sma','$i_jur_sma',
-'$n_alamat_sma','$n_kab_sma','$n_prop_sma','$n_pil1','$n_pil2','$n_pil3','$i_temp_ujian','$c_inf','$c_jalur','Registrasi','online','$i_agama','$image_name','$image_name2')"));
-replace_meta_chars(mysql_query("UPDATE t_pin SET `status` = 'aktif' WHERE t_pin.pin ='$i_registrasi' LIMIT 1 ;"));
-
-replace_meta_chars(mysql_query("INSERT INTO t_kelulusan (i_registrasi,n_nama,kd_prodi) VALUES ('$i_registrasi','$n_lengkap','$n_pil1')"));*/
-
-$query_tampil=mysql_query("SELECT * FROM `t_calon_mahasiswa` INNER JOIN t_gel ON t_calon_mahasiswa.c_gel = t_gel.KodeGel INNER JOIN t_tempat_ujian ON t_calon_mahasiswa.i_temp_ujian = t_tempat_ujian.KodeTmp INNER JOIN jalur_pendaftaran ON t_calon_mahasiswa.c_jalur = jalur_pendaftaran.id WHERE t_calon_mahasiswa.i_registrasi = '$i_registrasi'");
-  $row_tampil=mysql_fetch_array($query_tampil);
-	//D3
-	//pil 1
-	if ($row_tampil[n_pil1] =='01')
-	{
-		$pil1 = "D3 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil1] =='02')
-	{
-			$pil1 = "D3 - Manajemen Bisnis";
-	}
-	if ($row_tampil[n_pil1] =='03')
-	{
-		$pil1 = "D3 - Manajemen Informatika";
-	}
-	
-	if($row_tampil[n_pil1] =='04')
-	{
-			$pil1 = "D3 - Teknik Informatika";
-	}
-	if($row_tampil[n_pil1] =='05')
-	{
-			$pil1 = "D3 - Akuntansi";
-	}
-	if($row_tampil[n_pil1] =='21')
-	{
-			$pil1 = "S1 - Manajemen Logistik";
-	}
-	if($row_tampil[n_pil1] =='22')
-	{
-			$pil1 = "S1 - Manajemen Transportasi";
-	}
-       
-       if($row_tampil[n_pil1] =='31')
-	{
-			$pil1 = "D3 - Akselerasi Teknik Informatika";
-	}
-	if($row_tampil[n_pil1] =='32')
-	{
-			$pil1 = "D3 - Akselerasi Akuntansi";
-	}
-	
-	if($row_tampil[n_pil1] =='34')
-	{
-			$pil1 = "D4 - CLC (Akselerasi Logistik Bisnis)";
-	}
-	if($row_tampil[n_pil1] =='35')
-	{
-			$pil1 = "D4 - CAC (Akselerasi Akuntansi)";
-	}
-
-	//---pil 2
-	if ($row_tampil[n_pil2] =='01')
-	{
-		$pil2 = "D3 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil2] =='02')
-	{
-			$pil2 = "D3 - Manajemen Bisnis";
-	}
-	if ($row_tampil[n_pil2] =='03')
-	{
-		$pil2 = "D3 - Manajemen Informatika";
-	}
-	
-	if($row_tampil[n_pil2] =='04')
-	{
-			$pil2 = "D3 - Teknik Informatika";
-	}
-	if($row_tampil[n_pil2] =='05')
-	{
-			$pil2 = "D3 - Akuntansi";
-	}
-	if($row_tampil[n_pil2] =='21')
-	{
-			$pil2 = "S1 - Manajemen Logistik";
-	}
-	if($row_tampil[n_pil2] =='22')
-	{
-			$pil2 = "S1 - Manajemen Transportasi";
-	}
-
-      if($row_tampil[n_pil2] =='31')
-	{
-			$pil2 = "D3 - Akselerasi Teknik Informatika";
-	}
-	if($row_tampil[n_pil2] =='32')
-	{
-			$pil2 = "D3 - Akselerasi Akuntansi";
-	}
-	
-	if($row_tampil[n_pil2] =='34')
-	{
-			$pil2 = "D4 - CLC (Akselerasi Logistik Bisnis)";
-	}
-	if($row_tampil[n_pil2] =='35')
-	{
-			$pil2 = "D4 - CAC (Akselerasi Akuntansi)";
-	}
-
-	//-- pil 3
-	if ($row_tampil[n_pil3] =='01')
-	{
-		$pil3 = "D3 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil3] =='02')
-	{
-			$pil3 = "D3 - Manajemen Bisnis";
-	}
-	if ($row_tampil[n_pil3] =='03')
-	{
-		$pil3 = "D3 - Manajemen Informatika";
-	}
-	
-	if($row_tampil[n_pil3] =='04')
-	{
-			$pil3 = "D3 - Teknik Informatika";
-	}
-	if($row_tampil[n_pil3] =='05')
-	{
-			$pil3 = "D3 - Akuntansi";
-	}
-	if($row_tampil[n_pil3] =='21')
-	{
-			$pil3 = "S1 - Manajemen Logistik";
-	}
-	if($row_tampil[n_pil3] =='22')
-	{
-			$pil3 = "S1 - Manajemen Transportasi";
-	}
-
-	if($row_tampil[n_pil3] =='31')
-	{
-			$pil3 = "D3 - Akselerasi Teknik Informatika";
-	}
-	if($row_tampil[n_pil3] =='32')
-	{
-			$pil3 = "D3 - Akselerasi Akuntansi";
-	}
-	
-	if($row_tampil[n_pil3] =='34')
-	{
-			$pil3 = "D4 - CLC (Akselerasi Logistik Bisnis)";
-	}
-	if($row_tampil[n_pil3] =='35')
-	{
-			$pil3 = "D4 - CAC (Akselerasi Akuntansi)";
-	}
-
-	//D4
-	//pil 1
-	if ($row_tampil[n_pil1] =='11')
-	{
-		$pil1 = "D4 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil1] =='12')
-	{
-			$pil1 = "D4 - Manajemen Perusahaan / Bisnis";
-	}
-	if ($row_tampil[n_pil1] =='13')
-	{
-		$pil1 = "D4 - Teknik Informatika";
-	}
-	
-	if($row_tampil[n_pil1] =='14')
-	{
-			$pil1 = "D4 - Akuntansi Keuangan";
-	}
-	//---pil 2
-	if ($row_tampil[n_pil2] =='11')
-	{
-		$pil2 = "D4 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil2] =='12')
-	{
-			$pil2 = "D4 - Manajemen Perusahaan / Bisnis";
-	}
-	if ($row_tampil[n_pil2] =='13')
-	{
-		$pil2 = "D4 - Teknik Informatika";
-	}
-	
-	if($row_tampil[n_pil2] =='14')
-	{
-			$pil2 = "D4 - Akuntansi Keuangan";
-	}
-	//-- pil 3
-	if ($row_tampil[n_pil3] =='11')
-	{
-		$pil3 = "D4 - Logistik Bisnis";
-	}
-	
-	if($row_tampil[n_pil3] =='12')
-	{
-			$pil3 = "D4 - Manajemen Perusahaan / Bisnis";
-	}
-	if ($row_tampil[n_pil3] =='13')
-	{
-		$pil3 = "D4 - Teknik Informatika";
-	}
-	
-	if($row_tampil[n_pil3] =='14')
-	{
-			$pil3 = "D4 - Akuntansi Keuangan";
-	}
-
-
-
-	echo "<table width='100%' border='0' id='tablePrint'>
-  <tr>
-   &nbsp
-  </tr>
-  <tr>
-    <center><h1>BUKTI PENDAFTARAN ONLINE MAHASISWA BARU <br>
-POLTEKPOS & STIMLOG
-<h1></center>
-  </tr>
-  <tr>
-   &nbsp
-  </tr>
-  <tr>
-    <td colspan='3'><B>DATA PENDAFTAR</B></td>
-  </tr>
-  <tr>
-    <td width='5%'>No Pendaftaran </td>
-    <td width='1%'>:</td>
-    <td>$row_tampil[0]</td>
-  </tr>
-  <tr>
-    <td width='20%'>Nama Peserta </td>
-    <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[n_lengkap]</td>
-  </tr>
-  <tr>
-    <td width='20%'>NISN</td>
-    <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[nis]</td>
-  </tr>
-  <tr>
-    <td width='20%'>Email</td>
-    <td width='1%'>:</td>
-    <td width='92%'>$row_tampil[n_email]</td>
-  </tr>
-  <tr>
-    <td>Jalur</td>
-    <td>:</td>
-    <td>$row_tampil[nama_jalur] - $row_tampil[NamaGel]</td>
-  </tr>
-  <tr>
-    <td colspan='3'><B>PILIHAN PROGRAM STUDI</B></td>
-  </tr>
-  <tr>
-    <td>Pilihan 1 </td>
-    <td>:</td>
-    <td>$pil1</td>
-  </tr>
-  <tr>
-    <td>Pilihan 2 </td>
-    <td>:</td>
-    <td>$pil2</td>
-  </tr>
-  <tr>
-    <td>Pilihan 3 </td>
-    <td>:</td>
-    <td>$pil3</td>
-  </tr>
-  <tr>
-    <td colspan='3'><b>INFO LEBIH LANJUT HUBUNGI</b> : 
-<ul>
-<li>
-Sekretariat PMB Poltekpos-Stimlog<br />
-Jl. Sariasih No.54 Bandung 40151<br />
-Tlp: 022-2009562, 022-61693672, 022-93250092, Fax : 022-2011089<br />
-E-mail : info@poltekpos.ac.id,pmb@poltekpos.ac.id<br />
-http//: pmb.poltekpos.ac.id</li>
-</ul>			
-</td>
-  </tr>
-</table>
-";
-  echo "<div id='printpagebutton'><center><input type='button' value='Cetak Bukti Registrasi' onclick='printpage()'/>Untuk Kembali klik <a href=../../media.php?module=$module><em>disini</em></a></center></div>";
-
-}
-
 }
 ?>

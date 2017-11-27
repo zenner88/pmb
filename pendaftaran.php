@@ -40,10 +40,12 @@ include "config/koneksi.php";
 				<fieldset>
 					<h4>Pilih Jalur Pendaftaran:</h4>
 					<div class="form-group">
+						
 						<?php
 							$sql_jalur="SELECT * FROM jalur_pendaftaran where status=1";
 							$query_jalur=mysql_query($sql_jalur);
 							while ($xx =mysql_fetch_array($query_jalur))
+								//echo new DateTime();
 							{;?>
 							<input type="radio" class="form-radio" id="pilihan" name="jalur_pendaftaran" value="<?=$xx['id'];?>" checked/>
 							<i class="fa fa-key"></i><label> <?=$xx['nama_jalur'];?> </label>
@@ -91,8 +93,25 @@ include "config/koneksi.php";
 					</div>
 					<div class="form-group">
 						<label  for="f1-nisn">NISN</label>
-						<input type="text" name="nis" placeholder="NISN" class="form-control" id="f1-nisn">
+						<input type="number" name="nis" placeholder="NISN" class="form-control" id="f1-nisn" maxlength="10" onInput="javascript: if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
 					</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#f1-nisn').on('blur', function() {
+			var value = $(this).val();
+			$.ajax({
+				url: "daftar/nis.php",
+				type: "POST",
+				data: {"nis": value},
+				success:function(result) {
+					if (result > 0) {
+						alert('NISN Sudah Tersedia')
+					}
+				}
+			})
+		})
+	})
+</script>
 					<div class="form-group">
 						<label  for="f1-nisn">Tempat Lahir</label>
 						<input type="text" name="n_tempat_lahir" placeholder="Tempat Lahir" class="form-control" id="f1-nisn">
@@ -138,15 +157,15 @@ include "config/koneksi.php";
 					</div>					
 					<div class="form-group">
 						<label  for="f1-nisn">Kode Pos</label>
-						<input type="text" name="c_pos" placeholder="Kode Pos" class="form-control" id="f1-nisn">
+						<input type="number" name="c_pos" placeholder="Kode Pos" class="form-control" id="f1-nisn" maxlength="6" onInput="javascript: if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
 					</div>
 					<div class="form-group">
 						<label  for="f1-nisn">No Telephone/HP</label>
-						<input type="text" name="no_tlp" placeholder="No Telephone/HP" class="form-control" id="f1-nisn">
+						<input type="number" name="no_tlp" placeholder="No Telephone/HP" class="form-control" id="f1-nisn" maxlength="12" onInput="javascript: if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
 					</div>
 					<div class="form-group">
 						<label  for="f1-nisn">No KTP/NIK</label>
-						<input type="text" name="ktp" placeholder="No KTP/NIK" class="form-control" id="f1-nisn">
+						<input type="number" name="ktp" placeholder="No KTP/NIK" class="form-control" id="f1-nisn" maxlength="16" onInput="javascript: if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
 					</div>
 					<div class="form-group">
 						<label  for="f1-nisn">Pin BBM/ ID Line</label>

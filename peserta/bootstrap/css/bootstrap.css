@@ -2427,7 +2427,7 @@ input[type="month"].input-lg {
   line-height: 46px;
 }
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 .radio,
 .checkbox {
@@ -3701,7 +3701,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: left;
 }
 .nav-pills > li > a {
-  border-radius: 4px;
+/*border-radius: 4px;*/
 }
 .nav-pills > li + li {
   margin-left: 2px;

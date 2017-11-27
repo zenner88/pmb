@@ -2,7 +2,7 @@
 $server = "localhost";
 $username = "root";
 $password = "";
-$database = "pmb";
+$database = "pmb3";
 
 // Koneksi dan memilih database di server
 $mysqli = mysql_connect($server,$username,$password) or die("Koneksi gagal");

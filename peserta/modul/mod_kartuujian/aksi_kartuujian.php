@@ -9,15 +9,16 @@
 <body><center>
  <?php
  include "../../../config/koneksi.php";
+include "../../config/antisqlinjection.php";
 
   $sql_thnakademik="select * from t_tahun_akademik";
-  $query_thnakademik=mysql_query($sql_thnakademik,$koneksi);
+  $query_thnakademik=mysql_query($sql_thnakademik);
   $row_thnakademik=mysql_fetch_array($query_thnakademik);
   
-echo $i_registrasi=$_POST['id'];
+echo $i_registrasi=$_GET['pin'];
 
   $sql_tampil="select t_calon_mahasiswa.*,t_gel.namagel as nama_gel,t_tempat_ujian.namatmp as temp_ujian,t_waktu_ujian.* from t_calon_mahasiswa inner join t_gel on t_calon_mahasiswa.c_gel=t_gel.kodegel inner join t_tempat_ujian on t_calon_mahasiswa.i_temp_ujian=t_tempat_ujian.kodetmp,t_waktu_ujian  where t_calon_mahasiswa.i_registrasi='$_GET[kode_biva]' and t_waktu_ujian.kodegel = t_gel.kodegel";
-  $query_tampil=mysql_query($sql_tampil,$koneksi);
+  $query_tampil=mysql_query($sql_tampil);
   $row_tampil=mysql_fetch_array($query_tampil);
   
   	if ($row_tampil[23] =='MI')

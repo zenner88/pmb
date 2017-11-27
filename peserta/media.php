@@ -30,6 +30,16 @@ color: blue;
 	<SCRIPT type="text/javascript" src="js/dhtmlgoodies_calendar.js?random=20060118"></script>
 <!-- Akhir Kalender -->
 <link href="style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic" />
+  
+  <link rel="stylesheet" href="../css/fancybox.min.css" media="screen" />
+
+  <link rel="stylesheet" href="../css/video-js.min.css" media="screen" />
+
+  <link rel="stylesheet" href="../css/audioplayerv1.min.css" media="screen" />
+  <link href="bootstrap/css/bootstrap.css" rel="stylesheet"> 
+  <script src="../assets/js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script> 
 <script LANGUAGE="JavaScript">
 <!--
 // Nannette Thacker http://www.shiningstar.net
@@ -189,14 +199,14 @@ function sisa_bayar()
       <a class="navbar-brand label-hh" href="#">
 	  <?php 
 
-	  if ($_SESSION['pilihan']=="POLTEKPOS"){
+	  // if ($_SESSION['pilihan']=="POLTEKPOS"){
 		  
-		 echo "<img src=\"logo_poltekpos1.png\" width=\"30\"/> Politeknik Pos Indonesia";
+		 // echo "<img src=\"logo_poltekpos1.png\" width=\"30\"/> Politeknik Pos Indonesia";
 		  
-	  }
-	  else{
-		   echo "<img src=\"logo_stimlog1.png\" width=\"30\"/> Sekolah Tinggi Manajemen Logistik";
-		  }
+	  // }
+	  // else{
+		 //   echo "<img src=\"logo_stimlog1.png\" width=\"30\"/> Sekolah Tinggi Manajemen Logistik";
+		 //  }
 	  ?>
         
       </a>

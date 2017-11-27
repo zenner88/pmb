@@ -76,7 +76,7 @@ $_SESSION['jalu']=$jalu;
 $_SESSION['pil1']=$n_pil1;
 $_SESSION['pil2']=$n_pil2;
 
-$ceking = mysql_query("select nis from t_daftar where nis=".$nis);
+$ceking = mysql_query("SELECT nis FROM t_daftar WHERE nis LIKE '$nis%'");
 $data = mysql_fetch_array($ceking);
 $var = $data['nis'];
 if ($var == $nis){
@@ -90,7 +90,7 @@ if ($var == $nis){
 //simpan data ke database
 $query = mysql_query("insert into t_daftar (id_daftar, nama, nis, email, no_tlp, pilihan, jalur_pendaftaran, password, ypbpi, kode_briva, status, tgl_daftar, bukti_pembayaran, tgl_upload, username, jenis) values('', '$nama','$nis', '$email', '$no_tlp', '$pilihan', '$jalur_pendaftaran', '$password', '$ypbpi','$kode_briva','$bayar','$waktu_bayar','','','','')") or die(mysql_error());
 
-$query = mysql_query("INSERT INTO t_calon_mahasiswa(i_registrasi, i_thn_akademik, c_gel, n_lengkap, n_jns_kelamin, n_temp_lahir, d_lahir, n_alamat, n_kabupaten, n_propinsi, n_kota_lain, c_pos, i_telp, i_hp, n_email, n_ortu, n_ibu, n_instansi, n_jabatan, nis, n_sma, i_jur_sma, n_alamat_sma, n_kab_sma, n_prop_sma, n_pil1, n_pil2, n_pil3, i_temp_ujian, c_inf, q_sdp2, e_prestasi, rata2_XI_2, mtk_XI_2, ing_XI_2, rata2_XII_1, mtk_XII_1, ing_XII_1, nilai_rataujian, nilai_ingujian, nilai_mtkujian, c_jalur, status, diterima, n_ruangan, status_update, waktu_update, history, metode, n_agama, ktp, bbm, photo, rekomendasi, smt11, smt12) VALUES ('$kode_briva','2017','I','$nama','$n_jns_kelamin','$n_tempat_lahir','$d_lahir','$n_alamat','$n_kabupaten','$n_propinsi','-','$c_pos','$no_tlp','$no_tlp','$email','$n_ortu','$n_ibu','-','$n_jabatan','$nis','$n_sma','$i_jur_sma','$n_alamat_sma','$n_kab_sma','$n_prop_sma','$n_pil1','$n_pil2','$n_pil3','-','-','-','-','-','-','-','-','-','-','-','-','-','$jalur_pendaftaran','Registrasi','-','-','-','-','-','Online','$n_agama','$ktp','$bbm','-','-','-','-')") or die(mysql_error());
+$query = mysql_query("INSERT INTO t_calon_mahasiswa(i_registrasi, i_thn_akademik, c_gel, n_lengkap, n_jns_kelamin, n_temp_lahir, d_lahir, n_alamat, n_kabupaten, n_propinsi, n_kota_lain, c_pos, i_telp, i_hp, n_email, n_ortu, n_ibu, n_instansi, n_jabatan, nis, n_sma, i_jur_sma, n_alamat_sma, n_kab_sma, n_prop_sma, n_pil1, n_pil2, n_pil3, i_temp_ujian, c_inf, c_jalur, status, diterima, status_update, waktu_update, history, metode, n_agama, photo, smt1, smt2, smt3, smt4, smt5, mtk_1, mtk_2, mtk_avg, bing_1, bing_2, bing_avg, surat, sertifikat, nama_guru_bk, no_guru_bk) VALUES ('$kode_briva','2017','I','$nama','$n_jns_kelamin','$n_tempat_lahir','$d_lahir','$n_alamat','$n_kabupaten','$n_propinsi','-','$c_pos','$no_tlp','$no_tlp','$email','$n_ortu','$n_ibu','-','$n_jabatan','$nis','$n_sma','$i_jur_sma','$n_alamat_sma','$n_kab_sma','$n_prop_sma','$n_pil1','$n_pil2','$n_pil3','-','-','$jalur_pendaftaran','Registrasi','-','0','','-','online','$n_agama','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-')") or die(mysql_error());
 
 if ($query) {
     ?>

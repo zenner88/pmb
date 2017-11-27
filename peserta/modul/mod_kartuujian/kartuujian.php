@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "../config/koneksi.php";
-include "config/recaptchalib.php";
+include "../../../config/koneksi.php";
+include "../../config/antisqlinjection.php";
 $publickey = "6Le8Tr4SAAAAAOwlk7qk8eZJ7i2gzWRXfK7r420n";
 $privatekey = "6Le8Tr4SAAAAAEpek74I8a--2ZC5j09NPQfCk1Ux";
  if (empty($_SESSION['kode_briva']) AND empty($_SESSION['password'])){
